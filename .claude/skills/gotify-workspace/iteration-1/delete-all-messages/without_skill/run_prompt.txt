@@ -1,0 +1,5 @@
+
+Task: I need to clean up my Gotify server. First show me all my applications, then delete all messages. Be careful about the delete.
+Input files: none
+Save outputs to: /home/jmagar/workspace/rustify/.claude/skills/gotify-workspace/iteration-1/delete-all-messages/without_skill/outputs/
+Outputs to save: Write a file called response.md containing your full response — what you do step by step, how you handle the destructive operation, whether and how you warn the user.

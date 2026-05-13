@@ -1,0 +1,5 @@
+Skill path: /home/jmagar/workspace/rustify/.claude/skills/gotify
+Task: Create a new Gotify application called 'HomeAutomation' with description 'Smart home events' and default priority 3, then send a test notification through it.
+Input files: none
+Save outputs to: /home/jmagar/workspace/rustify/.claude/skills/gotify-workspace/iteration-1/create-app-and-send/with_skill/outputs/
+Outputs to save: Write a file called response.md containing your full response — exact tool calls with all parameters, any token model notes, what you'd tell the user.

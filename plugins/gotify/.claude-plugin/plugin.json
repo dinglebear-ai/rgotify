@@ -1,0 +1,111 @@
+{
+  "name": "gotify",
+  "version": "0.1.0",
+  "description": "Gotify push notification server via MCP",
+  "author": { "name": "jmagar" },
+  "repository": "https://github.com/jmagar/gotify-mcp",
+  "license": "MIT",
+  "keywords": [
+    "gotify",
+    "mcp",
+    "notifications",
+    "homelab"
+  ],
+  "mcpServers": "../.mcp.json",
+  "hooks": "./hooks/hooks.json",
+  "skills": "./skills",
+  "userConfig": {
+    "server_url": {
+      "type": "string",
+      "title": "Server URL",
+      "description": "Base URL the MCP client connects to. Keep the default http://localhost:9158 when running gotify-mcp locally. Set to the remote host URL (e.g. http://gotify-mcp.lan:9158) when connecting to a remote server. Must include scheme and port; do NOT include a trailing /mcp path — the plugin appends it.",
+      "required": true,
+      "default": "http://localhost:9158"
+    },
+    "api_token": {
+      "type": "string",
+      "title": "API token",
+      "description": "Bearer token for MCP HTTP authentication, sent as `Authorization: Bearer <token>`. Generate with `openssl rand -hex 32` or `just gen-token`. Must match GOTIFY_MCP_TOKEN on the server side.",
+      "sensitive": true,
+      "required": false
+    },
+    "no_auth": {
+      "type": "boolean",
+      "title": "Disable MCP auth",
+      "description": "Run gotify-mcp without bearer token auth. Use only when an upstream reverse proxy enforces auth before traffic reaches the server, or for local-only loopback deployments.",
+      "required": true,
+      "default": false
+    },
+    "auth_mode": {
+      "type": "string",
+      "title": "Auth mode",
+      "description": "Server auth mode. 'bearer' uses the static API token only. 'oauth' enables Google OAuth/JWT for clients like Codex while the static token is still accepted for this plugin connection. OAuth mode requires public_url, google_client_id, google_client_secret, and auth_admin_email.",
+      "required": true,
+      "default": "bearer"
+    },
+    "public_url": {
+      "type": "string",
+      "title": "Public URL",
+      "description": "Public base URL for OAuth issuer and resource metadata, e.g. https://gotify-mcp.example.com. Required when auth_mode=oauth. If empty and server_url starts with https://, setup derives it from server_url.",
+      "default": ""
+    },
+    "google_client_id": {
+      "type": "string",
+      "title": "Google OAuth client ID",
+      "description": "Google OAuth client ID used when auth_mode=oauth. Create a Web application OAuth client at Google Cloud Console. Required when auth_mode=oauth.",
+      "sensitive": true,
+      "default": ""
+    },
+    "google_client_secret": {
+      "type": "string",
+      "title": "Google OAuth client secret",
+      "description": "Google OAuth client secret used when auth_mode=oauth. Stored in the plugin env file with mode 600. Required when auth_mode=oauth.",
+      "sensitive": true,
+      "default": ""
+    },
+    "auth_admin_email": {
+      "type": "string",
+      "title": "OAuth admin email",
+      "description": "Bootstrap allowlisted Google account for OAuth mode. The server refuses to start OAuth without at least one allowlisted account. Required when auth_mode=oauth.",
+      "default": ""
+    },
+    "use_docker": {
+      "type": "boolean",
+      "title": "Deploy with Docker",
+      "description": "Deployment method. True: run via the bundled docker compose stack (containerized, exposes port 9158, mounts /data volume). False: run the binary as a systemd user service (lighter weight, logs go to journald).",
+      "required": true,
+      "default": false
+    },
+    "gotify_url": {
+      "type": "string",
+      "title": "Gotify server URL",
+      "description": "URL of your Gotify server, e.g. https://gotify.example.com. This is the upstream Gotify push notification service, not the gotify-mcp MCP endpoint. Required.",
+      "sensitive": true,
+      "required": true,
+      "default": ""
+    },
+    "gotify_client_token": {
+      "type": "string",
+      "title": "Gotify client token",
+      "description": "Gotify client token (starts with C) used for all management operations: list/create/delete apps, clients, and messages; read user info. Do not use an app token here.",
+      "sensitive": true,
+      "required": true,
+      "default": ""
+    },
+    "gotify_app_token": {
+      "type": "string",
+      "title": "Gotify app token",
+      "description": "Gotify application token (starts with A) used exclusively for sending messages via POST /message. Do not use a client token here.",
+      "sensitive": true,
+      "required": true,
+      "default": ""
+    },
+    "allow_destructive": {
+      "type": "boolean",
+      "title": "Allow destructive operations",
+      "description": "When true, skip the confirm=true gate on delete_message, delete_all_messages, delete_application, and delete_client. Set to false (default) to require explicit confirmation for every destructive operation.",
+      "required": true,
+      "default": false
+    }
+  }
+}

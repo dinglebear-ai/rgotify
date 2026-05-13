@@ -1,0 +1,33 @@
+{
+  "eval_id": 0,
+  "eval_name": "send-notification",
+  "run": "with_skill",
+  "assertions": [
+    {
+      "text": "Uses gotify MCP tool action=send",
+      "passed": true,
+      "evidence": "Response shows: gotify(action=\"send\", message=\"Backup completed successfully\", title=\"Backup\", priority=5)"
+    },
+    {
+      "text": "Correct message parameter",
+      "passed": true,
+      "evidence": "message=\"Backup completed successfully\" present in tool call"
+    },
+    {
+      "text": "Correct title parameter",
+      "passed": true,
+      "evidence": "title=\"Backup\" present in tool call"
+    },
+    {
+      "text": "Correct priority parameter",
+      "passed": true,
+      "evidence": "priority=5 present in tool call"
+    },
+    {
+      "text": "Does not confuse tokens",
+      "passed": true,
+      "evidence": "Correctly notes send uses GOTIFY_APP_TOKEN (app token starting with A), handled automatically by MCP server"
+    }
+  ],
+  "pass_rate": 1.0
+}

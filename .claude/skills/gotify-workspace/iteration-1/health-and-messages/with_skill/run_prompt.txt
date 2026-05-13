@@ -1,0 +1,5 @@
+Skill path: /home/jmagar/workspace/rustify/.claude/skills/gotify
+Task: Check the health of my Gotify server and show me the last 10 messages.
+Input files: none
+Save outputs to: /home/jmagar/workspace/rustify/.claude/skills/gotify-workspace/iteration-1/health-and-messages/with_skill/outputs/
+Outputs to save: Write a file called response.md containing your full response — what tool calls you make (with exact parameters), what you'd show the user, any notes about auth requirements.

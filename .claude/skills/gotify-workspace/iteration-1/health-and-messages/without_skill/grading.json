@@ -1,0 +1,28 @@
+{
+  "eval_id": 1,
+  "eval_name": "health-and-messages",
+  "run": "without_skill",
+  "assertions": [
+    {
+      "text": "Calls health action",
+      "passed": false,
+      "evidence": "Uses curl REST API, not MCP tool. Shows curl command for /health endpoint."
+    },
+    {
+      "text": "Calls messages with limit=10",
+      "passed": false,
+      "evidence": "Uses curl for /message?limit=10 — correct URL/limit but not the MCP tool"
+    },
+    {
+      "text": "Presents results from both calls",
+      "passed": true,
+      "evidence": "Describes both health and messages results with expected format"
+    },
+    {
+      "text": "Knows health needs no auth",
+      "passed": true,
+      "evidence": "Health curl shown without an auth header — correctly omitted"
+    }
+  ],
+  "pass_rate": 0.5
+}

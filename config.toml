@@ -1,0 +1,65 @@
+# gotify-mcp configuration
+#
+# PUT HERE: everything that is NOT a secret.
+# PUT IN .env: secrets (tokens, passwords, URLs with credentials), Docker runtime vars.
+#
+# Env vars always override these values (GOTIFY_* prefix for [gotify], GOTIFY_MCP_* for [mcp]).
+
+[gotify]
+# Whether to allow destructive operations without explicit confirm=true.
+# Secrets (url, client_token, app_token) go in .env / environment variables.
+allow_destructive = false
+
+[mcp]
+# Bind host for the MCP HTTP server.
+# 0.0.0.0 = all interfaces (reachable from other hosts on the LAN/VPN).
+# 127.0.0.1 = loopback only (use when behind a local reverse proxy).
+host = "0.0.0.0"
+
+# TCP port the MCP HTTP server listens on.
+port = 40020
+
+# Display name reported in MCP server info.
+server_name = "gotify-mcp"
+
+# Auth mode: "bearer" (static token) or "oauth" (Google OAuth + JWT).
+# When set to "oauth", credentials go in .env (GOTIFY_MCP_GOOGLE_CLIENT_ID, etc.)
+auth_mode = "bearer"
+
+# Public base URL for OAuth issuer/resource metadata.
+# Required when auth_mode = "oauth" and server_url doesn't start with https://.
+# public_url = "https://gotify-mcp.example.com"
+
+# Extra Host header values to accept (for reverse proxies / custom DNS names).
+# allowed_hosts = ["gotify-mcp.example.com", "gotify-mcp.example.com:443"]
+
+# Extra CORS origins to allow.
+# allowed_origins = ["https://gotify-mcp.example.com"]
+
+[mcp.auth]
+# Bootstrap admin email for OAuth mode (required when auth_mode = "oauth").
+admin_email = ""
+
+# Additional allowed Google account emails.
+allowed_emails = []
+
+# SQLite database path for OAuth session + token storage.
+sqlite_path = "auth.db"
+
+# RS256 private key path for JWT signing (generated automatically if absent).
+key_path = "auth-jwt.pem"
+
+# Token lifetimes (seconds).
+access_token_ttl_secs = 3600
+refresh_token_ttl_secs = 28800
+auth_code_ttl_secs = 300
+
+# Rate limit for the /authorize endpoint (requests per minute).
+authorize_rpm = 60
+
+# When true, static GOTIFY_MCP_TOKEN is rejected in OAuth mode.
+# Set false to allow the plugin's static token alongside OAuth tokens.
+disable_static_token_with_oauth = false
+
+# Allowed OAuth redirect URIs (setup script adds Claude/Codex callbacks automatically).
+allowed_client_redirect_uris = []

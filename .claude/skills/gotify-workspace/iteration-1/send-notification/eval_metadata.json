@@ -1,0 +1,32 @@
+{
+  "eval_id": 0,
+  "eval_name": "send-notification",
+  "prompt": "Send a push notification to my Gotify server saying 'Backup completed successfully' with title 'Backup' and priority 5.",
+  "assertions": [
+    {
+      "id": "uses_mcp_tool",
+      "name": "Uses gotify MCP tool action=send",
+      "description": "Response shows or describes calling gotify tool with action=send"
+    },
+    {
+      "id": "correct_message_param",
+      "name": "Correct message parameter",
+      "description": "Passes message='Backup completed successfully'"
+    },
+    {
+      "id": "correct_title_param",
+      "name": "Correct title parameter",
+      "description": "Passes title='Backup'"
+    },
+    {
+      "id": "correct_priority_param",
+      "name": "Correct priority parameter",
+      "description": "Passes priority=5"
+    },
+    {
+      "id": "no_wrong_token_advice",
+      "name": "Does not confuse tokens",
+      "description": "Does not suggest using client token for send — send uses APP token"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "skill_name": "gotify",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Send a push notification to my Gotify server saying 'Backup completed successfully' with title 'Backup' and priority 5.",
+      "expected_output": "Uses gotify MCP tool with action=send, message='Backup completed successfully', title='Backup', priority=5",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Check the health of my Gotify server and show me the last 10 messages.",
+      "expected_output": "Calls gotify(action='health') then gotify(action='messages', limit=10), presents both results clearly",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I need to clean up my Gotify server. First show me all my applications, then delete all messages. Be careful about the delete.",
+      "expected_output": "Calls gotify(action='applications') to list them, then warns about destructive operation, asks for confirmation before calling gotify(action='delete_all_messages', confirm=True)",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Create a new Gotify application called 'HomeAutomation' with description 'Smart home events' and default priority 3, then send a test notification through it.",
+      "expected_output": "Calls create_application, then send — notes that send uses the app token not client token, explains the token model if relevant",
+      "files": []
+    }
+  ]
+}

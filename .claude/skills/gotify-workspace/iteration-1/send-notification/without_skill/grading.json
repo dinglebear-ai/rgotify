@@ -1,0 +1,33 @@
+{
+  "eval_id": 0,
+  "eval_name": "send-notification",
+  "run": "without_skill",
+  "assertions": [
+    {
+      "text": "Uses gotify MCP tool action=send",
+      "passed": false,
+      "evidence": "Baseline uses curl REST API instead of MCP tool. Does mention MCP as a possibility but doesn't actually use it."
+    },
+    {
+      "text": "Correct message parameter",
+      "passed": true,
+      "evidence": "message is correct in the curl body"
+    },
+    {
+      "text": "Correct title parameter",
+      "passed": true,
+      "evidence": "title=Backup is in the curl body"
+    },
+    {
+      "text": "Correct priority parameter",
+      "passed": true,
+      "evidence": "priority=5 is in the curl body"
+    },
+    {
+      "text": "Does not confuse tokens",
+      "passed": true,
+      "evidence": "Baseline correctly says to use YOUR_APP_TOKEN for the message endpoint"
+    }
+  ],
+  "pass_rate": 0.8
+}

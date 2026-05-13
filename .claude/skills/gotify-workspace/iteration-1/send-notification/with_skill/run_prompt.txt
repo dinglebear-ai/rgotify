@@ -1,0 +1,5 @@
+Skill path: /home/jmagar/workspace/rustify/.claude/skills/gotify
+Task: Send a push notification to my Gotify server saying 'Backup completed successfully' with title 'Backup' and priority 5.
+Input files: none
+Save outputs to: /home/jmagar/workspace/rustify/.claude/skills/gotify-workspace/iteration-1/send-notification/with_skill/outputs/
+Outputs to save: Write a file called response.md containing your full response — what you would do, what tool calls you would make (show the exact parameters), and any explanation you'd give the user.

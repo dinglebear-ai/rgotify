@@ -1,0 +1,28 @@
+{
+  "eval_id": 2,
+  "eval_name": "delete-all-messages",
+  "run": "without_skill",
+  "assertions": [
+    {
+      "text": "Lists applications first",
+      "passed": true,
+      "evidence": "Shows curl for /application before the delete curl"
+    },
+    {
+      "text": "Warns about destructive delete",
+      "passed": true,
+      "evidence": "Mentions: 'this is permanent and cannot be undone' — minimal but present"
+    },
+    {
+      "text": "Uses confirm=True for destructive action",
+      "passed": false,
+      "evidence": "No confirm=true — baseline uses curl, which has no confirm mechanism. Just shows the DELETE curl command directly."
+    },
+    {
+      "text": "Does not silently execute delete",
+      "passed": false,
+      "evidence": "Baseline presents the full DELETE curl command ready to run, does not ask for confirmation before showing it. The warning is minimal ('Note that this is permanent') and appears AFTER presenting the command, not before."
+    }
+  ],
+  "pass_rate": 0.5
+}

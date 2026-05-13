@@ -1,0 +1,32 @@
+{
+  "eval_id": 3,
+  "eval_name": "create-app-and-send",
+  "prompt": "Create a new Gotify application called 'HomeAutomation' with description 'Smart home events' and default priority 3, then send a test notification through it.",
+  "assertions": [
+    {
+      "id": "calls_create_application",
+      "name": "Calls create_application",
+      "description": "Calls gotify(action='create_application', name='HomeAutomation', ...)"
+    },
+    {
+      "id": "correct_description",
+      "name": "Correct description param",
+      "description": "Passes description='Smart home events'"
+    },
+    {
+      "id": "correct_default_priority",
+      "name": "Correct default_priority param",
+      "description": "Passes default_priority=3"
+    },
+    {
+      "id": "calls_send",
+      "name": "Calls send action",
+      "description": "Calls gotify(action='send', message=...) for the test notification"
+    },
+    {
+      "id": "token_awareness",
+      "name": "Token model awareness",
+      "description": "Either notes that send uses app token not client token, or correctly uses/describes the send action without confusion"
+    }
+  ]
+}

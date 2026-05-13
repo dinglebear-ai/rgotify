@@ -1,0 +1,41 @@
+{
+  "name": "gotify-mcp",
+  "version": "0.1.0",
+  "description": "Gotify push notification server MCP bridge — send alerts, manage apps and clients, browse message history.",
+  "homepage": "https://github.com/jmagar/gotify-mcp",
+  "repository": "https://github.com/jmagar/gotify-mcp",
+  "license": "MIT",
+  "keywords": [
+    "gotify",
+    "notifications",
+    "push",
+    "alerts",
+    "homelab",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "../.mcp.json",
+  "interface": {
+    "displayName": "Gotify MCP",
+    "shortDescription": "Send push notifications and manage Gotify apps and clients",
+    "longDescription": "MCP server bridging Claude to a self-hosted Gotify push notification service. Send alerts with custom priority, list and browse message history, create and manage notification applications and clients, all from Claude or the CLI.",
+    "developerName": "Jacob Magar",
+    "category": "Infrastructure",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/jmagar/gotify-mcp",
+    "defaultPrompt": [
+      "Send a notification saying the backup completed successfully.",
+      "List recent messages from my Gotify server.",
+      "Show all Gotify applications and their priorities."
+    ],
+    "brandColor": "#4F46E5"
+  },
+  "author": {
+    "name": "Jacob Magar",
+    "email": "jmagar@users.noreply.github.com",
+    "url": "https://github.com/jmagar"
+  }
+}

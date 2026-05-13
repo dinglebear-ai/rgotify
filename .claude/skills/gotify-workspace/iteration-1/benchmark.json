@@ -1,0 +1,43 @@
+{
+  "skill_name": "gotify",
+  "iteration": 1,
+  "configurations": [
+    {
+      "name": "with_skill",
+      "label": "With gotify skill",
+      "evals": [
+        {"eval_name": "send-notification", "pass_rate": 1.0, "assertions_passed": 5, "assertions_total": 5},
+        {"eval_name": "health-and-messages", "pass_rate": 1.0, "assertions_passed": 4, "assertions_total": 4},
+        {"eval_name": "delete-all-messages", "pass_rate": 1.0, "assertions_passed": 4, "assertions_total": 4},
+        {"eval_name": "create-app-and-send", "pass_rate": 1.0, "assertions_passed": 5, "assertions_total": 5}
+      ],
+      "overall_pass_rate": 1.0,
+      "total_assertions_passed": 18,
+      "total_assertions": 18
+    },
+    {
+      "name": "without_skill",
+      "label": "Without skill (baseline)",
+      "evals": [
+        {"eval_name": "send-notification", "pass_rate": 0.8, "assertions_passed": 4, "assertions_total": 5},
+        {"eval_name": "health-and-messages", "pass_rate": 0.5, "assertions_passed": 2, "assertions_total": 4},
+        {"eval_name": "delete-all-messages", "pass_rate": 0.5, "assertions_passed": 2, "assertions_total": 4},
+        {"eval_name": "create-app-and-send", "pass_rate": 0.4, "assertions_passed": 2, "assertions_total": 5}
+      ],
+      "overall_pass_rate": 0.556,
+      "total_assertions_passed": 10,
+      "total_assertions": 18
+    }
+  ],
+  "delta": {
+    "pass_rate_improvement": 0.444,
+    "description": "Skill improves pass rate by 44.4 percentage points overall"
+  },
+  "analyst_observations": [
+    "The send-notification eval shows the smallest gap (100% vs 80%) — the baseline knows to use an app token for send and gets the params right. The only gap is it defaults to curl rather than the MCP tool.",
+    "The delete-all-messages eval shows the most important qualitative difference: the skill produces a clear STOP warning with explicit user confirmation before proceeding. The baseline mentions it's permanent but immediately presents the delete command. This safety behavior gap is the highest-value win from the skill.",
+    "The create-app-and-send eval reveals that the baseline, while functionally correct for the REST API, doesn't know the MCP-specific snake_case parameter names (default_priority vs defaultPriority) and doesn't use the MCP tool at all.",
+    "The health-and-messages eval shows a clean 2x improvement — the skill knows to use the MCP tool and that health needs no auth, while the baseline hedges with curl and asks if an MCP tool is available.",
+    "All assertions checking MCP tool usage are discriminating (always fail baseline, always pass with-skill). This is expected — the point of the skill is to direct Claude to use the MCP tool."
+  ]
+}

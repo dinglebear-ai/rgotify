@@ -1,0 +1,33 @@
+{
+  "eval_id": 3,
+  "eval_name": "create-app-and-send",
+  "run": "with_skill",
+  "assertions": [
+    {
+      "text": "Calls create_application",
+      "passed": true,
+      "evidence": "gotify(action='create_application', name='HomeAutomation', description='Smart home events', default_priority=3) shown explicitly"
+    },
+    {
+      "text": "Correct description param",
+      "passed": true,
+      "evidence": "description='Smart home events' present in tool call"
+    },
+    {
+      "text": "Correct default_priority param",
+      "passed": true,
+      "evidence": "default_priority=3 present in tool call"
+    },
+    {
+      "text": "Calls send action",
+      "passed": true,
+      "evidence": "gotify(action='send', message='HomeAutomation app created — test notification', ...) shown"
+    },
+    {
+      "text": "Token model awareness",
+      "passed": true,
+      "evidence": "Explicitly explains: 'send always uses GOTIFY_APP_TOKEN from your environment', 'create_application uses client token', notes difference between env token and newly-created app token"
+    }
+  ],
+  "pass_rate": 1.0
+}

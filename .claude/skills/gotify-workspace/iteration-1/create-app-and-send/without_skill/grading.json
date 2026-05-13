@@ -1,0 +1,33 @@
+{
+  "eval_id": 3,
+  "eval_name": "create-app-and-send",
+  "run": "without_skill",
+  "assertions": [
+    {
+      "text": "Calls create_application",
+      "passed": false,
+      "evidence": "Uses curl POST to /application — correct action but not the MCP tool"
+    },
+    {
+      "text": "Correct description param",
+      "passed": true,
+      "evidence": "description field in curl body matches"
+    },
+    {
+      "text": "Correct default_priority param",
+      "passed": false,
+      "evidence": "Baseline uses 'defaultPriority' (camelCase) in curl body, which is correct for the REST API, but the MCP action uses 'default_priority' (snake_case). Baseline doesn't know the MCP parameter name convention."
+    },
+    {
+      "text": "Calls send action",
+      "passed": false,
+      "evidence": "Uses curl POST to /message — correct action but not the MCP tool"
+    },
+    {
+      "text": "Token model awareness",
+      "passed": true,
+      "evidence": "Baseline correctly identifies: client token for creating apps, app token for sending messages. Good awareness of the two-token system."
+    }
+  ],
+  "pass_rate": 0.4
+}

@@ -1,0 +1,27 @@
+{
+  "eval_id": 1,
+  "eval_name": "health-and-messages",
+  "prompt": "Check the health of my Gotify server and show me the last 10 messages.",
+  "assertions": [
+    {
+      "id": "calls_health",
+      "name": "Calls health action",
+      "description": "Calls gotify(action='health') or equivalent"
+    },
+    {
+      "id": "calls_messages_with_limit",
+      "name": "Calls messages with limit=10",
+      "description": "Calls gotify(action='messages', limit=10)"
+    },
+    {
+      "id": "presents_both_results",
+      "name": "Presents results from both calls",
+      "description": "Shows/describes results from both health and messages"
+    },
+    {
+      "id": "no_auth_note_for_health",
+      "name": "Knows health needs no auth",
+      "description": "Either doesn't mention auth for health, or correctly states it needs no token"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "tv.tootie/gotify-mcp",
+  "title": "Gotify MCP",
+  "description": "MCP server for Gotify push notifications — send alerts, manage apps and clients, browse message history.",
+  "repository": {
+    "url": "https://github.com/jmagar/gotify-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/jmagar/gotify-mcp:0.1.0",
+      "version": "0.1.0",
+      "environmentVariables": [
+        {
+          "name": "GOTIFY_URL",
+          "description": "Base URL of your Gotify server, e.g. https://gotify.example.com.",
+          "isRequired": true,
+          "isSecret": false
+        },
+        {
+          "name": "GOTIFY_CLIENT_TOKEN",
+          "description": "Gotify client token (starts with C) for management operations — list/create/delete apps, clients, and messages.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "GOTIFY_APP_TOKEN",
+          "description": "Gotify application token (starts with A) used exclusively for sending messages via POST /message.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "GOTIFY_MCP_TOKEN",
+          "description": "Bearer token for MCP HTTP endpoint authentication. Generate with: openssl rand -hex 32.",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://gotify-mcp.tootie.tv/mcp"
+    }
+  ]
+}

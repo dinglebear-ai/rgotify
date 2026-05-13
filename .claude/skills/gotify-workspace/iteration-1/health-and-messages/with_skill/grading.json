@@ -1,0 +1,28 @@
+{
+  "eval_id": 1,
+  "eval_name": "health-and-messages",
+  "run": "with_skill",
+  "assertions": [
+    {
+      "text": "Calls health action",
+      "passed": true,
+      "evidence": "gotify(action='health') shown explicitly"
+    },
+    {
+      "text": "Calls messages with limit=10",
+      "passed": true,
+      "evidence": "gotify(action='messages', limit=10) shown explicitly"
+    },
+    {
+      "text": "Presents results from both calls",
+      "passed": true,
+      "evidence": "Both health result and messages result shown with example responses and explanations"
+    },
+    {
+      "text": "Knows health needs no auth",
+      "passed": true,
+      "evidence": "Explicitly states: 'health needs no authentication token at all — it's a public endpoint'"
+    }
+  ],
+  "pass_rate": 1.0
+}
