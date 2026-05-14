@@ -9,7 +9,6 @@ services:
       dockerfile: config/Dockerfile
     container_name: gotify-mcp
     restart: unless-stopped
-    user: "${GOTIFY_UID:-1000}:${GOTIFY_GID:-1000}"
     env_file:
       - path: .env
         required: false

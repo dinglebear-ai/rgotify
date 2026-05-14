@@ -29,6 +29,10 @@ async fn main() -> Result<()> {
         _ => {}
     }
 
+    if let Some((command, json)) = cli::setup::SetupCommand::parse(&args)? {
+        return cli::setup::run(command, json);
+    }
+
     let stdio_mode = matches!(args.as_slice(), [c] if c == "mcp");
     let serve_mode = args.is_empty()
         || matches!(args.as_slice(), [c] if c == "serve")
@@ -158,6 +162,9 @@ fn print_usage() {
   gotify [serve]                           Start MCP HTTP server
   gotify mcp                               Start MCP stdio transport
   gotify doctor [--json]                   Pre-flight environment check
+  gotify setup check [--json]              Check local plugin setup
+  gotify setup repair [--json]             Repair local plugin setup
+  gotify setup plugin-hook [--no-repair] [--json]
 
 Read:
   gotify health [--json]                   Server health

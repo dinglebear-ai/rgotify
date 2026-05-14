@@ -1,4 +1,5 @@
 pub mod doctor;
+pub mod setup;
 
 use anyhow::{bail, Result};
 use serde_json::Value;

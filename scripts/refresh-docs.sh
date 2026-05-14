@@ -103,8 +103,8 @@ EOF
 append_changes_log() {
   ensure_changes_file
   { printf '\n## %s\n\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-    printf '- scope: `%s`\n' "$(refresh_scope)"
-    printf '- summary: `%s added, %s modified, %s removed`\n' "$4" "$5" "$6"
+    printf -- '- scope: `%s`\n' "$(refresh_scope)"
+    printf -- '- summary: `%s added, %s modified, %s removed`\n' "$4" "$5" "$6"
   } >> "$CHANGES_FILE"
 }
 summarize_reference_changes() {
@@ -124,8 +124,8 @@ main() {
   if [[ "$DRY_RUN" != true ]]; then sd="$(make_tmpdir)"; bs="$sd/before.sha256"; as="$sd/after.sha256"; snapshot_references "$bs"; fi
   mkdir -p "$REF_DIR/gotify/docs" "$REF_DIR/gotify/repos" "$REF_DIR/mcp/docs" "$REF_DIR/mcp/repos"
   if [[ "$SKIP_CRAWL" != true ]]; then
-    crawl_docs "https://gotify.net/docs"            "gotify.net"              "gotify/docs"
-    crawl_docs "https://modelcontextprotocol.io"    "modelcontextprotocol.io" "mcp/docs"
+    crawl_docs "https://gotify.net/docs" || log "WARN: gotify docs crawl failed, continuing"            "gotify.net"              "gotify/docs"
+    crawl_docs "https://modelcontextprotocol.io"    "modelcontextprotocol.io" "mcp/docs" || log "WARN: mcp docs crawl failed, continuing"
   fi
   if [[ "$SKIP_REPOMIX" != true ]]; then
     pack_repo "gotify/server"                      "gotify/repos/gotify-server.xml"             "api/**,router/**,model/**" "node_modules/**"

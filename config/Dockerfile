@@ -10,19 +10,19 @@ COPY Cargo.toml Cargo.lock ./
 RUN --mount=type=cache,id=gotify-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
     --mount=type=cache,id=gotify-cargo-git,target=/usr/local/cargo/git,sharing=locked \
     --mount=type=cache,id=gotify-cargo-target,target=/app/target,sharing=locked \
-    mkdir src && echo "fn main() {}" > src/main.rs && cargo build --release --locked && rm -rf src
+    mkdir src && echo "fn main() {}" > src/main.rs && cargo build --release --locked -p gotify-mcp && rm -rf src
 
 # Build real binary
 COPY src/ src/
 RUN --mount=type=cache,id=gotify-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
     --mount=type=cache,id=gotify-cargo-git,target=/usr/local/cargo/git,sharing=locked \
     --mount=type=cache,id=gotify-cargo-target,target=/app/target,sharing=locked \
-    touch src/main.rs && cargo build --release --locked && cp target/release/gotify /usr/local/bin/gotify
+    touch src/main.rs && cargo build --release --locked -p gotify-mcp && cp target/release/gotify /usr/local/bin/gotify
 
 # Runtime — minimal Debian image with ca-certificates, curl (healthcheck), su-exec (entrypoint)
 FROM debian:bookworm-slim
 RUN apt-get update && \
-    apt-get install -y ca-certificates curl su-exec && \
+    apt-get install -y ca-certificates curl gosu && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local/bin/gotify /usr/local/bin/gotify
@@ -44,4 +44,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 LABEL io.modelcontextprotocol.server.name="tv.tootie/gotify-mcp"
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["gotify", "serve", "mcp"]
+CMD ["serve", "mcp"]

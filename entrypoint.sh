@@ -43,7 +43,7 @@ if ! chown -R 1000:1000 "${DATA_DIR}" 2>/dev/null; then
 fi
 
 # Verify the data dir is actually writable by UID 1000 before starting.
-if ! su-exec 1000:1000 sh -c "touch '${DATA_DIR}/.write_test' 2>/dev/null && rm -f '${DATA_DIR}/.write_test'"; then
+if ! gosu 1000:1000 sh -c "touch '${DATA_DIR}/.write_test' 2>/dev/null && rm -f '${DATA_DIR}/.write_test'"; then
     echo "FATAL: ${DATA_DIR} is not writable by UID 1000" >&2
     echo "  Check the volume mount permissions." >&2
     exit 1
@@ -69,4 +69,4 @@ echo "[entrypoint] User:     1000:1000"
 
 # ── 7. Drop privileges and exec ──────────────────────────────────────────────
 # exec replaces this shell process — signals go directly to the service (PID 1).
-exec su-exec 1000:1000 "${BINARY}" "$@"
+exec gosu 1000:1000 "${BINARY}" "$@"
