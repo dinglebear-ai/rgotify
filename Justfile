@@ -41,7 +41,7 @@ logs:
     docker compose logs -f
 
 health:
-    curl -sf http://localhost:9158/health | jq .
+    curl -sf http://localhost:40020/health | jq .
 
 setup:
     cp -n .env.example .env || true
@@ -57,7 +57,7 @@ repair:
     #!/usr/bin/env bash
     set -euo pipefail
     echo "Checking gotify-mcp health..."
-    if curl -sf http://localhost:9158/health >/dev/null 2>&1; then
+    if curl -sf http://localhost:40020/health >/dev/null 2>&1; then
       echo "Server is healthy."
     else
       echo "Server unreachable — restarting..."
@@ -93,25 +93,25 @@ validate-skills:
 generate-cli:
     #!/usr/bin/env bash
     set -euo pipefail
-    echo "⚠  Server must be running on port 3100 (run 'just dev' first)"
-    echo "⚠  Generated CLI embeds your OAuth token — do not commit or share"
+    echo "⚠  Server must be running on port 40020 (run 'just dev' first)"
+    echo "⚠  Generated CLI embeds your token — do not commit or share"
     mkdir -p dist dist/.cache
     current_hash=$(timeout 10 curl -sf \
-      -H "Authorization: Bearer $MCP_TOKEN" \
+      -H "Authorization: Bearer ${GOTIFY_MCP_TOKEN:-}" \
       -H "Accept: application/json, text/event-stream" \
-      http://localhost:3100/mcp/tools/list 2>/dev/null | sha256sum | cut -d' ' -f1 || echo "nohash")
-    cache_file="dist/.cache/syslog-mcp-cli.schema_hash"
-    if [[ -f "$cache_file" ]] && [[ "$(cat "$cache_file")" == "$current_hash" ]] && [[ -f "dist/syslog-mcp-cli" ]]; then
-      echo "SKIP: syslog-mcp tool schema unchanged — use existing dist/syslog-mcp-cli"
+      http://localhost:40020/mcp/tools/list 2>/dev/null | sha256sum | cut -d' ' -f1 || echo "nohash")
+    cache_file="dist/.cache/gotify-cli.schema_hash"
+    if [[ -f "$cache_file" ]] && [[ "$(cat "$cache_file")" == "$current_hash" ]] && [[ -f "dist/gotify-cli" ]]; then
+      echo "SKIP: gotify tool schema unchanged — use existing dist/gotify-cli"
       exit 0
     fi
     timeout 30 mcporter generate-cli \
-      --command http://localhost:3100/mcp \
-      --header "Authorization: Bearer $MCP_TOKEN" \
-      --name syslog-mcp-cli \
-      --output dist/syslog-mcp-cli
+      --command http://localhost:40020/mcp \
+      --header "Authorization: Bearer ${GOTIFY_MCP_TOKEN:-}" \
+      --name gotify-cli \
+      --output dist/gotify-cli
     printf '%s' "$current_hash" > "$cache_file"
-    echo "✓ Generated dist/syslog-mcp-cli (requires bun at runtime)"
+    echo "✓ Generated dist/gotify-cli (requires bun at runtime)"
 
 clean:
     cargo clean
@@ -122,10 +122,11 @@ build-plugin: release
     #!/bin/sh
     set -eu
     target_dir="${CARGO_TARGET_DIR:-target}"
-    if [ ! -x "$target_dir/release/syslog" ] && [ -x ".cache/cargo/release/syslog" ]; then
+    if [ ! -x "$target_dir/release/gotify" ] && [ -x ".cache/cargo/release/gotify" ]; then
       target_dir=".cache/cargo"
     fi
-    install -m 755 "$target_dir/release/syslog" bin/syslog
+    mkdir -p bin
+    install -m 755 "$target_dir/release/gotify" bin/gotify
 
 # Publish: bump version, tag, push (triggers crates.io + Docker publish)
 publish bump="patch":
@@ -146,9 +147,6 @@ publish bump="patch":
     echo "Version: ${CURRENT} → ${NEW}"
     sed -i "s/^version = \"${CURRENT}\"/version = \"${NEW}\"/" Cargo.toml
     cargo check 2>/dev/null || true
-    for f in .claude-plugin/plugin.json .codex-plugin/plugin.json gemini-extension.json; do
-      [ -f "$f" ] && python3 -c 'import json,sys; p=sys.argv[1]; v=sys.argv[2]; d=json.load(open(p)); d["version"]=v; json.dump(d,open(p,"w"),indent=2); open(p,"a").write("\n")' "$f" "${NEW}"
-    done
     git add -A && git commit -m "release: v${NEW}" && git tag "v${NEW}" && git push origin main --tags
     echo "Tagged v${NEW} — publish workflow will run automatically"
 
