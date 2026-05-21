@@ -1,36 +1,16 @@
+name: rustify
+
+# Local development stack. Builds from this checkout.
 services:
   gotify-mcp:
-    # Default to the published image so plugin deploys can `docker compose pull`
-    # without source. Override with --build (or `docker compose build`) for local
-    # source development.
-    image: ghcr.io/jmagar/gotify-mcp:${GOTIFY_MCP_VERSION:-latest}
+    extends:
+      file: docker-compose.prod.yml
+      service: gotify-mcp
+    image: rustify:dev
+    pull_policy: build
     build:
       context: .
       dockerfile: config/Dockerfile
-    container_name: gotify-mcp
-    restart: unless-stopped
-    env_file:
-      - path: .env
-        required: false
-    ports:
-      - "${GOTIFY_MCP_PORT:-40020}:40020/tcp"
-    volumes:
-      - ${HOME}/.gotify:/data
-    networks:
-      - jakenet
-
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:40020/health || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-          cpus: '0.5'
 
 networks:
   jakenet:

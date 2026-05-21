@@ -4,14 +4,14 @@
   "title": "Gotify MCP",
   "description": "MCP server for Gotify push notifications — send alerts, manage apps and clients, browse message history.",
   "repository": {
-    "url": "https://github.com/jmagar/gotify-mcp",
+    "url": "https://github.com/jmagar/rustify",
     "source": "github"
   },
   "version": "0.1.0",
   "packages": [
     {
       "registryType": "oci",
-      "identifier": "ghcr.io/jmagar/gotify-mcp:0.1.0",
+      "identifier": "ghcr.io/jmagar/rustify:0.1.0",
       "version": "0.1.0",
       "environmentVariables": [
         {
