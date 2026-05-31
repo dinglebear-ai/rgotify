@@ -13,6 +13,6 @@ services:
       dockerfile: config/Dockerfile
 
 networks:
-  jakenet:
-    name: ${DOCKER_NETWORK:-jakenet}
+  rustify:
+    name: ${DOCKER_NETWORK:-rustify}
     external: true
