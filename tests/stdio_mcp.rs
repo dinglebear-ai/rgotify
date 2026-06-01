@@ -15,7 +15,7 @@ async fn stdio_client(
     rmcp::service::RunningService<rmcp::RoleClient, ()>,
     Option<tokio::process::ChildStderr>,
 )> {
-    let binary = env!("CARGO_BIN_EXE_gotify");
+    let binary = env!("CARGO_BIN_EXE_rgotify");
     let (transport, stderr) = TokioChildProcess::builder(Command::new(binary).configure(|cmd| {
         cmd.arg("mcp")
             .env("GOTIFY_URL", "http://localhost:1")

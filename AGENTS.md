@@ -153,6 +153,6 @@ bd close <id>         # Complete work
 
 ## Plugin setup hooks
 
-Plugin setup is owned by the binary. Keep `plugins/gotify/hooks/plugin-setup.sh` as a thin adapter that maps `CLAUDE_PLUGIN_OPTION_*` values to environment variables, prepares appdata, ensures `gotify` is on `PATH`, and then calls `gotify setup plugin-hook "$@"`.
+Plugin setup is owned by the binary. `plugins/gotify/hooks/hooks.json` calls `${CLAUDE_PLUGIN_ROOT}/bin/rgotify setup plugin-hook` directly (no shell wrapper). The binary's `apply_plugin_options()` (`src/cli/setup.rs`), run at the top of the plugin-hook path, maps `CLAUDE_PLUGIN_OPTION_*` values to the binary's `GOTIFY_*` env vars (and `CLAUDE_PLUGIN_DATA` → `GOTIFY_MCP_HOME`); `install_self()` self-installs the binary into `~/.local/bin`.
 
-`gotify setup check` is read-only, `gotify setup repair` is idempotent, and `gotify setup plugin-hook --no-repair` is audit mode. Do not add Docker Compose, systemd, or service bootstrap logic back into the hook script.
+`gotify setup check` is read-only, `gotify setup repair` is idempotent, and `gotify setup plugin-hook --no-repair` is audit mode. Do not add Docker Compose, systemd, or service bootstrap logic into the hook path.

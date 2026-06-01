@@ -1,6 +1,6 @@
 [package]
 name = "gotify-mcp"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.86"
 description = "Gotify MCP server — push notification API bridge"
