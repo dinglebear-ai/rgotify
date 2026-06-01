@@ -7,7 +7,7 @@ description = "Gotify MCP server — push notification API bridge"
 autobins = false
 
 [[bin]]
-name = "gotify"
+name = "rgotify"
 path = "src/main.rs"
 
 [dependencies]

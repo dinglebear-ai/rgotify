@@ -5,7 +5,7 @@
 set -e
 
 DATA_DIR="${DATA_DIR:-/data}"
-SERVICE_NAME="gotify"
+SERVICE_NAME="rgotify"
 BINARY="/usr/local/bin/${SERVICE_NAME}"
 
 # ── 1. Binary exists and is executable ───────────────────────────────────────

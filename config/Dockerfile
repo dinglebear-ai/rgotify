@@ -17,7 +17,7 @@ COPY src/ src/
 RUN --mount=type=cache,id=gotify-cargo-registry,target=/usr/local/cargo/registry,sharing=locked \
     --mount=type=cache,id=gotify-cargo-git,target=/usr/local/cargo/git,sharing=locked \
     --mount=type=cache,id=gotify-cargo-target,target=/app/target,sharing=locked \
-    touch src/main.rs && cargo build --release --locked -p gotify-mcp && cp target/release/gotify /usr/local/bin/gotify
+    touch src/main.rs && cargo build --release --locked -p gotify-mcp && cp target/release/rgotify /usr/local/bin/rgotify
 
 # Runtime — minimal Debian image with ca-certificates, curl (healthcheck), su-exec (entrypoint)
 FROM debian:bookworm-slim
@@ -25,7 +25,7 @@ RUN apt-get update && \
     apt-get install -y ca-certificates curl gosu && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/local/bin/gotify /usr/local/bin/gotify
+COPY --from=builder /usr/local/bin/rgotify /usr/local/bin/rgotify
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

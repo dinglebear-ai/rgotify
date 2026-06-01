@@ -34,20 +34,20 @@ export_option() {
   export "${env_name}=${value}"
 }
 
-ensure_gotify_binary() {
-  if command -v gotify >/dev/null 2>&1; then
+ensure_rgotify_binary() {
+  if command -v rgotify >/dev/null 2>&1; then
     return 0
   fi
 
-  local bundled="${CLAUDE_PLUGIN_ROOT}/bin/gotify"
+  local bundled="${CLAUDE_PLUGIN_ROOT}/bin/rgotify"
   if [[ -x "${bundled}" ]]; then
     mkdir -p "${HOME}/.local/bin"
-    ln -sf "${bundled}" "${HOME}/.local/bin/gotify"
+    ln -sf "${bundled}" "${HOME}/.local/bin/rgotify"
     export PATH="${HOME}/.local/bin:${PATH}"
   fi
 
-  command -v gotify >/dev/null 2>&1 || {
-    printf 'gotify plugin setup: gotify binary not found on PATH or at %s\n' "${bundled}" >&2
+  command -v rgotify >/dev/null 2>&1 || {
+    printf 'gotify plugin setup: rgotify binary not found on PATH or at %s\n' "${bundled}" >&2
     exit 1
   }
 }
@@ -71,8 +71,8 @@ main() {
   export_option GOTIFY_APP_TOKEN CLAUDE_PLUGIN_OPTION_GOTIFY_APP_TOKEN GOTIFY_APP_TOKEN
   export_option GOTIFY_ALLOW_DESTRUCTIVE CLAUDE_PLUGIN_OPTION_ALLOW_DESTRUCTIVE GOTIFY_ALLOW_DESTRUCTIVE
 
-  ensure_gotify_binary
-  gotify setup plugin-hook "$@"
+  ensure_rgotify_binary
+  rgotify setup plugin-hook "$@"
 }
 
 main "$@"

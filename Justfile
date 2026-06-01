@@ -47,8 +47,8 @@ setup:
     cp -n .env.example .env || true
 
 install: release
-    install -m 755 target/release/gotify ~/.local/bin/gotify
-    @echo "Installed: ~/.local/bin/gotify"
+    install -m 755 target/release/rgotify ~/.local/bin/rgotify
+    @echo "Installed: ~/.local/bin/rgotify"
 
 gen-token:
     openssl rand -hex 32
@@ -81,7 +81,7 @@ validate-skills:
 validate-plugin: validate-skills
 
 runtime-current:
-    bash scripts/check-runtime-current.sh --unit gotify-mcp.service --service gotify-mcp --expected-binary target/release/gotify
+    bash scripts/check-runtime-current.sh --unit gotify-mcp.service --service gotify-mcp --expected-binary target/release/rgotify
 
 # Generate a standalone CLI for this server (requires running server; HTTP-only transport)
 generate-cli:
@@ -116,12 +116,12 @@ build-plugin: release
     #!/bin/sh
     set -eu
     target_dir="${CARGO_TARGET_DIR:-target}"
-    if [ ! -x "$target_dir/release/gotify" ] && [ -x ".cache/cargo/release/gotify" ]; then
+    if [ ! -x "$target_dir/release/rgotify" ] && [ -x ".cache/cargo/release/rgotify" ]; then
       target_dir=".cache/cargo"
     fi
     mkdir -p bin plugins/gotify/bin
-    install -m 755 "$target_dir/release/gotify" bin/gotify
-    install -m 755 "$target_dir/release/gotify" plugins/gotify/bin/gotify
+    install -m 755 "$target_dir/release/rgotify" bin/rgotify
+    install -m 755 "$target_dir/release/rgotify" plugins/gotify/bin/rgotify
 
 # Publish: bump version, tag, push (triggers crates.io + Docker publish)
 publish bump="patch":

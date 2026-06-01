@@ -378,7 +378,7 @@ pub async fn run_doctor(mcp_port: u16, json: bool) -> Result<()> {
     checks.push(check_config_file(&data_dir));
     checks.push(check_dir_writable("Data directory", &data_dir));
     checks.push(check_dir_writable("Log directory", &data_dir.join("logs")));
-    checks.push(check_binary_in_path("gotify"));
+    checks.push(check_binary_in_path("rgotify"));
 
     // ── Credentials ───────────────────────────────────────────────────────────
     checks.push(check_required_env(
