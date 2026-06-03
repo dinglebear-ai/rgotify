@@ -1,6 +1,5 @@
 {
   "name": "gotify-mcp",
-  "version": "0.1.1",
   "description": "Gotify push notification server MCP bridge \u2014 send alerts, manage apps and clients, browse message history.",
   "homepage": "https://github.com/jmagar/gotify-mcp",
   "repository": "https://github.com/jmagar/gotify-mcp",

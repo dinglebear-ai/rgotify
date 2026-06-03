@@ -1,6 +1,5 @@
 {
   "name": "gotify",
-  "version": "0.1.1",
   "description": "Gotify push notification server via MCP",
   "author": {
     "name": "jmagar"
