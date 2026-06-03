@@ -1,5 +1,6 @@
 {
   "name": "gotify",
+  "version": "0.1.1",
   "description": "Gotify push notification server via MCP",
   "author": {
     "name": "jmagar"
@@ -12,7 +13,7 @@
     "notifications",
     "homelab"
   ],
-  "mcpServers": "../.mcp.json",
+  "mcpServers": "./.mcp.json",
   "skills": "./skills",
   "userConfig": {
     "server_url": {
