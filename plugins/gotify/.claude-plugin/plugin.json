@@ -12,13 +12,12 @@
     "notifications",
     "homelab"
   ],
-  "mcpServers": "./.mcp.json",
   "skills": "./skills",
   "userConfig": {
     "server_url": {
       "type": "string",
       "title": "Server URL",
-      "description": "Base URL the MCP client connects to. Keep the default http://localhost:9158 when running gotify-mcp locally. Set to the remote host URL (e.g. http://gotify-mcp.lan:9158) when connecting to a remote server. Must include scheme and port; do NOT include a trailing /mcp path \u2014 the plugin appends it.",
+      "description": "Base URL the MCP client connects to. Keep the default http://localhost:9158 when running gotify-mcp locally. Set to the remote host URL (e.g. http://gotify-mcp.lan:9158) when connecting to a remote server. Must include scheme and port; do NOT include a trailing /mcp path — the plugin appends it.",
       "required": true,
       "default": "http://localhost:9158"
     },

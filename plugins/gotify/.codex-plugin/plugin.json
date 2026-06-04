@@ -1,6 +1,6 @@
 {
   "name": "gotify-mcp",
-  "description": "Gotify push notification server MCP bridge \u2014 send alerts, manage apps and clients, browse message history.",
+  "description": "Gotify push notification server MCP bridge — send alerts, manage apps and clients, browse message history.",
   "homepage": "https://github.com/jmagar/gotify-mcp",
   "repository": "https://github.com/jmagar/gotify-mcp",
   "license": "MIT",
@@ -13,7 +13,6 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Gotify MCP",
     "shortDescription": "Send push notifications and manage Gotify apps and clients",

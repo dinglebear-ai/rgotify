@@ -114,47 +114,47 @@ gotify(action="delete_client", client_id=2, confirm=True)
 
 ## Tier 2 — CLI binary (secondary)
 
-Binary: `~/.local/bin/gotify` (or `/usr/local/bin/gotify` in Docker)
+Binary: `~/workspace/rustify/target/release/rgotify` (or `/usr/local/bin/rgotify` in Docker)
 
 Add `--json` to any command for raw JSON output. Add `--confirm` to destructive commands.
 
 ```bash
 # Server info
-gotify health
-gotify version
-gotify me
+rgotify health
+rgotify version
+rgotify me
 
 # Messages
-gotify messages                           # last 50
-gotify messages --limit 20
-gotify messages --app-id 3               # filter by app
-gotify messages --since 100              # cursor pagination
-gotify messages --json                   # raw JSON
+rgotify messages                           # last 50
+rgotify messages --limit 20
+rgotify messages --app-id 3               # filter by app
+rgotify messages --since 100              # cursor pagination
+rgotify messages --json                   # raw JSON
 
 # Applications
-gotify applications
+rgotify applications
 
 # Send a notification
-gotify send "Server rebooted" --title "Alert" --priority 8
+rgotify send "Server rebooted" --title "Alert" --priority 8
 
 # Create / delete apps
-gotify create app "Monitoring" --description "System alerts" --priority 5
-gotify create-app "Monitoring"           # short alias
-gotify delete app 3 --confirm
-gotify delete-app 3 --confirm            # short alias
+rgotify create app "Monitoring" --description "System alerts" --priority 5
+rgotify create-app "Monitoring"           # short alias
+rgotify delete app 3 --confirm
+rgotify delete-app 3 --confirm            # short alias
 
 # Delete messages
-gotify delete message 42 --confirm
-gotify delete-message 42 --confirm       # short alias
-gotify delete all --confirm              # wipe everything
-gotify delete-all --confirm              # short alias
+rgotify delete message 42 --confirm
+rgotify delete-message 42 --confirm       # short alias
+rgotify delete all --confirm              # wipe everything
+rgotify delete-all --confirm              # short alias
 
 # Clients
-gotify clients
-gotify create client "MyApp"
-gotify create-client "MyApp"             # short alias
-gotify delete client 2 --confirm
-gotify delete-client 2 --confirm         # short alias
+rgotify clients
+rgotify create client "MyApp"
+rgotify create-client "MyApp"             # short alias
+rgotify delete client 2 --confirm
+rgotify delete-client 2 --confirm         # short alias
 ```
 
 ---
