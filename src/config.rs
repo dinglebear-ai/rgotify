@@ -10,7 +10,7 @@ pub struct Config {
 }
 
 /// Gotify server connection config
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(default)]
 pub struct GotifyConfig {
     /// Gotify base URL (GOTIFY_URL)
@@ -23,16 +23,6 @@ pub struct GotifyConfig {
     pub allow_destructive: bool,
 }
 
-impl Default for GotifyConfig {
-    fn default() -> Self {
-        Self {
-            url: String::new(),
-            client_token: String::new(),
-            app_token: String::new(),
-            allow_destructive: false,
-        }
-    }
-}
 
 /// MCP HTTP server configuration
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -213,6 +203,13 @@ impl Config {
             "GOTIFY_MCP_AUTH_ADMIN_EMAIL",
             &mut config.mcp.auth.admin_email,
         );
+        // Auth mode: 'oauth' enables the full OAuth flow; anything else stays bearer.
+        if let Ok(v) = std::env::var("GOTIFY_MCP_AUTH_MODE") {
+            config.mcp.auth.mode = match v.trim().to_lowercase().as_str() {
+                "oauth" => AuthMode::OAuth,
+                _ => AuthMode::Bearer,
+            };
+        }
 
         Ok(config)
     }
