@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0](https://github.com/jmagar/gotify-rmcp/compare/v0.1.1...v0.2.0) (2026-07-09)
+
+
+### Added
+
+* align gotify npm launcher naming ([88a4871](https://github.com/jmagar/gotify-rmcp/commit/88a4871035417696c36bc4e1c7920f25070f3fc3))
+
+
+### Fixed
+
+* **ci:** switch OpenWiki to local openai-compatible proxy ([e7591aa](https://github.com/jmagar/gotify-rmcp/commit/e7591aafefec7b9bbf75e198b5b0cf2a86bb23a3))
+
 ## [Unreleased]
 
 ## [0.1.1] - 2026-06-01
