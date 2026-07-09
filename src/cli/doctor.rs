@@ -134,19 +134,16 @@ fn walkdir_size(dir: &PathBuf) -> u64 {
 }
 
 fn check_binary_in_path(binary: &str) -> DoctorCheck {
-    let path_var = std::env::var("PATH").unwrap_or_default();
-    for dir in path_var.split(':') {
-        let candidate = PathBuf::from(dir).join(binary);
+    let path_var = std::env::var_os("PATH").unwrap_or_default();
+    for dir in std::env::split_paths(&path_var) {
+        let candidate = dir.join(binary);
         if candidate.is_file() {
-            if let Ok(meta) = std::fs::metadata(&candidate) {
-                use std::os::unix::fs::PermissionsExt;
-                if meta.permissions().mode() & 0o111 != 0 {
-                    return DoctorCheck::pass(
-                        "config",
-                        format!("Binary in PATH: {binary}"),
-                        candidate.display().to_string(),
-                    );
-                }
+            if is_executable(&candidate) {
+                return DoctorCheck::pass(
+                    "config",
+                    format!("Binary in PATH: {binary}"),
+                    candidate.display().to_string(),
+                );
             }
         }
     }
@@ -155,6 +152,20 @@ fn check_binary_in_path(binary: &str) -> DoctorCheck {
         format!("Binary in PATH: {binary}"),
         format!("`{binary}` not found in $PATH — add ~/.local/bin to PATH or re-run install.sh"),
     )
+}
+
+#[cfg(unix)]
+fn is_executable(path: &PathBuf) -> bool {
+    use std::os::unix::fs::PermissionsExt;
+
+    std::fs::metadata(path)
+        .map(|meta| meta.permissions().mode() & 0o111 != 0)
+        .unwrap_or(false)
+}
+
+#[cfg(not(unix))]
+fn is_executable(path: &PathBuf) -> bool {
+    path.is_file()
 }
 
 fn check_required_env(var_name: &str, hint: &str) -> DoctorCheck {
