@@ -1,4 +1,4 @@
-# Quickstart — gotify-mcp
+# Quickstart — gotify-rmcp
 
 Get Claude sending push notifications to your Gotify server in 5 minutes.
 
@@ -24,8 +24,8 @@ You need two tokens. Create them in the Gotify web UI:
 ## Step 2: Build
 
 ```bash
-git clone https://github.com/jmagar/gotify-mcp
-cd gotify-mcp
+git clone https://github.com/jmagar/gotify-rmcp
+cd gotify-rmcp
 cargo build --release
 ```
 
@@ -45,7 +45,7 @@ echo "MCP token: $GOTIFY_MCP_TOKEN"
 
 ```bash
 ./target/release/gotify
-# → gotify-mcp starting on 0.0.0.0:9158
+# → gotify-rmcp starting on 0.0.0.0:9158
 ```
 
 ## Step 5: Verify
@@ -68,7 +68,7 @@ curl -s -X POST http://localhost:9158/mcp \
       "name": "gotify",
       "arguments": {
         "action": "send",
-        "message": "Hello from gotify-mcp!",
+        "message": "Hello from gotify-rmcp!",
         "title": "Test"
       }
     }

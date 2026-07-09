@@ -1,4 +1,4 @@
-# Component Inventory — gotify-mcp
+# Component Inventory — gotify-rmcp
 
 Complete listing of all MCP actions, CLI commands, environment variables, and HTTP endpoints.
 

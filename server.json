@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "tv.tootie/gotify-mcp",
+  "name": "tv.tootie/gotify-rmcp",
   "title": "Gotify MCP",
   "description": "MCP server for Gotify push notifications — send alerts, manage apps and clients, browse message history.",
   "repository": {
-    "url": "https://github.com/jmagar/rustify",
+    "url": "https://github.com/jmagar/gotify-rmcp",
     "source": "github"
   },
   "version": "0.1.0",
   "packages": [
     {
       "registryType": "oci",
-      "identifier": "ghcr.io/jmagar/rustify:0.1.0",
+      "identifier": "ghcr.io/jmagar/gotify-rmcp:0.1.0",
       "version": "0.1.0",
       "environmentVariables": [
         {
@@ -44,7 +44,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://gotify-mcp.tootie.tv/mcp"
+      "url": "https://gotify-rmcp.tootie.tv/mcp"
     }
   ]
 }

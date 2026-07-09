@@ -1,4 +1,4 @@
-# Architecture Overview — gotify-mcp
+# Architecture Overview — gotify-rmcp
 
 ## System diagram
 

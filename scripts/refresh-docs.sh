@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# refresh-docs.sh — Refresh local reference documentation for gotify-mcp
+# refresh-docs.sh — Refresh local reference documentation for gotify-rmcp
 # Pattern: §38 in docs/PATTERNS.md (rmcp-template)
 # Usage: scripts/refresh-docs.sh [--dry-run] [--skip-crawl] [--skip-repomix]
 set -Eeuo pipefail; IFS=$'\n\t'
@@ -73,7 +73,7 @@ write_index() {
   [[ -d "$REF_DIR/gotify/docs" ]] && g="$(find "$REF_DIR/gotify/docs" -type f|wc -l|tr -d ' ')"
   [[ -d "$REF_DIR/mcp/docs"   ]] && m="$(find "$REF_DIR/mcp/docs"   -type f|wc -l|tr -d ' ')"
   cat > "$REF_DIR/INDEX.md" <<EOF
-# Reference Index — gotify-mcp
+# Reference Index — gotify-rmcp
 | Path | Contents | Source |
 |---|---|---|
 | \`gotify/docs/\` | Axon-crawled Gotify docs | https://gotify.net/docs |
@@ -94,7 +94,7 @@ ensure_changes_file() {
   mkdir -p "$REF_DIR"; [[ -f "$CHANGES_FILE" ]] && return 0
   cat > "$CHANGES_FILE" <<EOF
 ---
-title: Reference Refresh Change Log — gotify-mcp
+title: Reference Refresh Change Log — gotify-rmcp
 generated_by: scripts/refresh-docs.sh
 created_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 ---

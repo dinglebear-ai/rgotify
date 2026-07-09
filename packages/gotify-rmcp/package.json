@@ -1,0 +1,38 @@
+{
+  "name": "gotify-rmcp",
+  "version": "0.1.1",
+  "description": "Node launcher for the gotify-rmcp Rust MCP server and rgotify CLI binary.",
+  "license": "MIT",
+  "homepage": "https://github.com/jmagar/gotify-rmcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmagar/gotify-rmcp.git",
+    "directory": "packages/gotify-rmcp"
+  },
+  "bugs": {
+    "url": "https://github.com/jmagar/gotify-rmcp/issues"
+  },
+  "bin": {
+    "gotify-rmcp": "bin/rgotify.js",
+    "rgotify": "bin/rgotify.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "scripts/",
+    "README.md"
+  ],
+  "scripts": {
+    "postinstall": "node scripts/install.js",
+    "test": "node --test",
+    "check": "node --check bin/rgotify.js && node --check scripts/install.js && node --check lib/platform.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "gotify",
+    "notifications"
+  ]
+}

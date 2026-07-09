@@ -1,6 +1,32 @@
-# gotify-mcp
+# gotify-rmcp
 
 Rust MCP server that bridges Claude (and other MCP clients) to a self-hosted [Gotify](https://gotify.net/) push notification server. Send notifications, manage applications and clients, and query messages — all from Claude or the CLI.
+
+
+## npm / npx
+
+Run the stdio MCP server or CLI without a manual binary install:
+
+```bash
+npx -y gotify-rmcp --help
+```
+
+MCP clients can use the same launcher:
+
+```json
+{
+  "mcpServers": {
+    "gotify-rmcp": {
+      "command": "npx",
+      "args": ["-y", "gotify-rmcp"]
+    }
+  }
+}
+```
+
+The npm package downloads the `rgotify` binary from GitHub Releases during `postinstall` and keeps the release tag aligned with `packages/gotify-rmcp/package.json`.
+
+Naming follows the rmcp family pattern: repo and npm package use `<service>-rmcp` (`gotify-rmcp`), while the CLI keeps the short Rust binary alias `r<service>` (`rgotify`). Launcher install overrides use the `GOTIFY_RMCP_*` env prefix.
 
 ## Overview
 
@@ -11,7 +37,7 @@ Claude / MCP client
 RMCP Streamable HTTP :9158/mcp   (or stdio for local clients)
        │
        ▼
-  gotify-mcp (GotifyService)
+  gotify-rmcp (GotifyService)
        │  X-Gotify-Key header
        ▼
   Gotify REST API
@@ -29,7 +55,7 @@ The binary runs in three modes:
 
 ## Token Model
 
-Gotify uses two distinct token types. `gotify-mcp` requires both.
+Gotify uses two distinct token types. `gotify-rmcp` requires both.
 
 | Token | Env var | Prefix | Used for |
 |-------|---------|--------|----------|

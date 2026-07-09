@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# install.sh — One-line installer for gotify-mcp
+# install.sh — One-line installer for gotify-rmcp
 #
 # Downloads the gotify binary to ~/.local/bin and writes a starter .env file.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/jmagar/gotify-mcp/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/jmagar/gotify-rmcp/main/install.sh | bash
 #   # or locally:
 #   bash install.sh [--version 0.1.0] [--bin-dir /usr/local/bin]
 #
@@ -15,7 +15,7 @@
 
 set -euo pipefail
 
-REPO="jmagar/gotify-mcp"
+REPO="jmagar/gotify-rmcp"
 BINARY="gotify"
 SERVICE="gotify"
 DEFAULT_BIN_DIR="${HOME}/.local/bin"
@@ -172,7 +172,7 @@ if [[ -z "${VERSION}" ]]; then
     exit 1
   fi
 fi
-echo "Installing gotify-mcp v${VERSION} (${TARGET})..."
+echo "Installing gotify-rmcp v${VERSION} (${TARGET})..."
 
 # ── Download binary ───────────────────────────────────────────────────────────
 ARCHIVE="${BINARY}-${TARGET}.tar.gz"
@@ -209,7 +209,7 @@ if [[ "${WRITE_ENV}" == "true" ]]; then
   ENV_FILE="${DATA_DIR}/.env"
   if [[ ! -f "${ENV_FILE}" ]]; then
     cat > "${ENV_FILE}" << 'EOF'
-# gotify-mcp — fill in your values, then: gotify serve
+# gotify-rmcp — fill in your values, then: rgotify serve
 #
 # Token types:
 #   Client tokens (C...) — management: list apps, clients, messages

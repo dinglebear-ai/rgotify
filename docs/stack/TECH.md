@@ -1,4 +1,4 @@
-# Technology Choices — gotify-mcp
+# Technology Choices — gotify-rmcp
 
 Technology stack reference and rationale.
 
@@ -32,7 +32,7 @@ RMCP owns the MCP protocol lifecycle:
 - Host/Origin validation.
 - Tool listing and tool call routing.
 
-`gotify-mcp` uses stateless JSON-response mode: `POST /mcp` returns `Content-Type: application/json`. No SSE streams.
+`gotify-rmcp` uses stateless JSON-response mode: `POST /mcp` returns `Content-Type: application/json`. No SSE streams.
 
 ## HTTP client: reqwest
 
