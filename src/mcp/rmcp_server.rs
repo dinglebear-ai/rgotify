@@ -30,6 +30,7 @@ const READ_ONLY_ACTIONS: &[&str] = &[
     "messages",
     "applications",
     "clients",
+    "status",
 ];
 
 #[derive(Clone)]

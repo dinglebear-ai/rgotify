@@ -29,7 +29,7 @@ cd gotify-rmcp
 cargo build --release
 ```
 
-The binary is at `./target/release/gotify`.
+The binary is at `./target/release/rgotify`.
 
 ## Step 3: Configure environment
 
@@ -44,19 +44,19 @@ echo "MCP token: $GOTIFY_MCP_TOKEN"
 ## Step 4: Start the server
 
 ```bash
-./target/release/gotify
-# → gotify-rmcp starting on 0.0.0.0:9158
+./target/release/rgotify
+# -> gotify-rmcp starting on 0.0.0.0:40020
 ```
 
 ## Step 5: Verify
 
 ```bash
 # Health check (no auth needed)
-curl -sf http://localhost:9158/health
-# → {"health":"green"}
+curl -sf http://localhost:40020/health
+# -> {"status":"ok"}
 
 # Send a test notification
-curl -s -X POST http://localhost:9158/mcp \
+curl -s -X POST http://localhost:40020/mcp \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer $GOTIFY_MCP_TOKEN" \
@@ -86,7 +86,7 @@ Add to `~/.claude/claude_desktop_config.json`:
   "mcpServers": {
     "gotify": {
       "type": "http",
-      "url": "http://localhost:9158/mcp",
+      "url": "http://localhost:40020/mcp",
       "headers": {
         "Authorization": "Bearer YOUR_MCP_TOKEN_HERE"
       }
@@ -101,7 +101,7 @@ Or use stdio mode (no separate server process needed):
 {
   "mcpServers": {
     "gotify": {
-      "command": "/path/to/gotify",
+      "command": "/path/to/rgotify",
       "args": ["mcp"],
       "env": {
         "GOTIFY_URL": "https://gotify.example.com",

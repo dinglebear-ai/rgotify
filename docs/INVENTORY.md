@@ -16,6 +16,7 @@ One MCP tool is exposed. The required `action` argument selects the operation.
 | `messages` | List messages | — | `app_id` (integer), `limit` (integer, default 50), `since` (integer message ID) |
 | `applications` | List all applications | — | — |
 | `clients` | List all clients | — | — |
+| `status` | Runtime status, config snapshot, and counters | — | — |
 
 ### Write actions
 
@@ -50,40 +51,40 @@ All CLI commands call the same `GotifyService` methods as the MCP actions.
 ### Read commands
 
 ```
-gotify health [--json]
-gotify version [--json]
-gotify me [--json]
-gotify messages [--app-id N] [--limit N] [--since N] [--json]
-gotify applications [--json]
-gotify clients [--json]
+rgotify health [--json]
+rgotify version [--json]
+rgotify me [--json]
+rgotify messages [--app-id N] [--limit N] [--since N] [--json]
+rgotify applications [--json]
+rgotify clients [--json]
 ```
 
 ### Write commands
 
 ```
-gotify send <message> [--title T] [--priority N] [--json]
-gotify create app <name> [--description D] [--priority N] [--json]
-gotify create client <name> [--json]
+rgotify send <message> [--title T] [--priority N] [--json]
+rgotify create app <name> [--description D] [--priority N] [--json]
+rgotify create client <name> [--json]
 ```
 
 ### Destructive commands
 
 ```
-gotify delete message <id> [--confirm] [--json]
-gotify delete all [--confirm] [--json]
-gotify delete app <app_id> [--confirm] [--json]
-gotify delete client <client_id> [--confirm] [--json]
+rgotify delete message <id> [--confirm] [--json]
+rgotify delete all [--confirm] [--json]
+rgotify delete app <app_id> [--confirm] [--json]
+rgotify delete client <client_id> [--confirm] [--json]
 ```
 
 ### Server modes
 
 ```
-gotify                  # HTTP MCP server (port 9158)
-gotify serve            # Same
-gotify serve mcp        # Same
-gotify mcp              # stdio MCP transport
-gotify --help
-gotify --version
+rgotify                  # HTTP MCP server (port 40020)
+rgotify serve            # Same
+rgotify serve mcp        # Same
+rgotify mcp              # stdio MCP transport
+rgotify --help
+rgotify --version
 ```
 
 ## Environment variables
@@ -95,7 +96,7 @@ gotify --version
 | `GOTIFY_APP_TOKEN` | yes for send | — | yes | App token (starts `A`) for sending |
 | `GOTIFY_ALLOW_DESTRUCTIVE` | no | `false` | no | Skip confirm gate for destructive ops |
 | `GOTIFY_MCP_HOST` | no | `0.0.0.0` | no | MCP HTTP bind host |
-| `GOTIFY_MCP_PORT` | no | `9158` | no | MCP HTTP bind port |
+| `GOTIFY_MCP_PORT` | no | `40020` | no | MCP HTTP bind port |
 | `GOTIFY_MCP_TOKEN` | no | — | yes | Static bearer token for MCP auth |
 | `GOTIFY_MCP_NO_AUTH` | no | `false` | no | Disable MCP authentication |
 | `GOTIFY_MCP_PUBLIC_URL` | no | — | no | Public URL (reserved for OAuth mode) |
@@ -113,7 +114,7 @@ gotify --version
 
 | Port | Protocol | Purpose |
 |------|----------|---------|
-| 9158 | TCP | RMCP Streamable HTTP MCP server |
+| 40020 | TCP | RMCP Streamable HTTP MCP server |
 
 ## Runtime dependencies
 

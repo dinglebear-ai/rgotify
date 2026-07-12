@@ -117,7 +117,7 @@ impl CliCommand {
             },
             ["doctor"] => Self::Doctor,
             other => bail!(
-                "unknown command: {}\n\nRun `gotify --help` for usage.",
+                "unknown command: {}\n\nRun `rgotify --help` for usage.",
                 other.join(" ")
             ),
         };
@@ -147,7 +147,7 @@ pub async fn run(service: &GotifyService, cmd: CliCommand, json: bool) -> Result
     if let CliCommand::Doctor = cmd {
         let port = gotify_mcp::config::Config::load()
             .map(|c| c.mcp.port)
-            .unwrap_or(9158);
+            .unwrap_or(40020);
         return doctor::run_doctor(port, json).await;
     }
 

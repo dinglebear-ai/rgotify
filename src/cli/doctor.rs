@@ -364,15 +364,15 @@ fn print_doctor_report(checks: &[DoctorCheck]) {
 
     println!("  {}", "━".repeat(48));
     if failures.is_empty() && warnings.is_empty() {
-        println!("  All checks passed — ready to run: gotify serve\n");
+        println!("  All checks passed — ready to run: rgotify serve\n");
     } else if failures.is_empty() {
         println!(
-            "  {} warning(s) — review above, then run: gotify serve\n",
+            "  {} warning(s) — review above, then run: rgotify serve\n",
             warnings.len()
         );
     } else {
         println!(
-            "  {} issue(s) found. Fix {} before running: gotify serve\n",
+            "  {} issue(s) found. Fix {} before running: rgotify serve\n",
             failures.len(),
             if failures.len() == 1 { "it" } else { "them" }
         );

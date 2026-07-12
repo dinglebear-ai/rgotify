@@ -164,31 +164,31 @@ async fn build_auth_policy(config: &Config) -> Result<AuthPolicy> {
 fn print_usage() {
     eprintln!(
         "Usage:
-  gotify [serve]                           Start MCP HTTP server
-  gotify mcp                               Start MCP stdio transport
-  gotify doctor [--json]                   Pre-flight environment check
-  gotify setup check [--json]              Check local plugin setup
-  gotify setup repair [--json]             Repair local plugin setup
-  gotify setup plugin-hook [--no-repair] [--json]
+  rgotify [serve]                          Start MCP HTTP server
+  rgotify mcp                              Start MCP stdio transport
+  rgotify doctor [--json]                  Pre-flight environment check
+  rgotify setup check [--json]             Check local plugin setup
+  rgotify setup repair [--json]            Repair local plugin setup
+  rgotify setup plugin-hook [--no-repair] [--json]
 
 Read:
-  gotify health [--json]                   Server health
-  gotify version [--json]                  Server version
-  gotify me [--json]                       Current user
-  gotify messages [--app-id N] [--limit N] [--since N] [--json]
-  gotify applications [--json]             List applications
-  gotify clients [--json]                  List clients
+  rgotify health [--json]                  Server health
+  rgotify version [--json]                 Server version
+  rgotify me [--json]                      Current user
+  rgotify messages [--app-id N] [--limit N] [--since N] [--json]
+  rgotify applications [--json]            List applications
+  rgotify clients [--json]                 List clients
 
 Write:
-  gotify send <message> [--title T] [--priority N] [--json]
-  gotify create app <name> [--description D] [--priority N] [--json]
-  gotify create client <name> [--json]
+  rgotify send <message> [--title T] [--priority N] [--json]
+  rgotify create app <name> [--description D] [--priority N] [--json]
+  rgotify create client <name> [--json]
 
 Destructive (add --confirm):
-  gotify delete message <id> [--confirm] [--json]
-  gotify delete all [--confirm] [--json]
-  gotify delete app <app_id> [--confirm] [--json]
-  gotify delete client <client_id> [--confirm] [--json]
+  rgotify delete message <id> [--confirm] [--json]
+  rgotify delete all [--confirm] [--json]
+  rgotify delete app <app_id> [--confirm] [--json]
+  rgotify delete client <client_id> [--confirm] [--json]
 
 Environment:
   GOTIFY_URL                  Gotify server URL (required)
