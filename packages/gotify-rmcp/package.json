@@ -1,6 +1,6 @@
 {
   "name": "gotify-rmcp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Node launcher for the Gotify Rust MCP server and rgotify CLI for push notifications over stdio or HTTP.",
   "license": "MIT",
   "homepage": "https://github.com/jmagar/gotify-rmcp#readme",
@@ -48,5 +48,7 @@
     "oauth",
     "http-server",
     "stdio"
-  ]
+  ],
+  "mcpName": "ai.dinglebear/gotify-rmcp",
+  "binaryVersion": "0.1.2"
 }

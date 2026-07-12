@@ -1,50 +1,117 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "tv.tootie/gotify-rmcp",
-  "title": "Gotify MCP",
-  "description": "MCP server for Gotify push notifications — send alerts, manage apps and clients, browse message history.",
+  "name": "ai.dinglebear/gotify-rmcp",
+  "title": "Gotify RMCP",
+  "description": "Rust MCP server and CLI for Gotify push notifications and message management.",
+  "version": "0.1.3",
+  "websiteUrl": "https://github.com/jmagar/gotify-rmcp",
   "repository": {
     "url": "https://github.com/jmagar/gotify-rmcp",
-    "source": "github"
+    "source": "github",
+    "id": "1238227288"
   },
-  "version": "0.1.2",
+  "icons": [
+    {
+      "src": "https://avatars.githubusercontent.com/u/38927646?v=4",
+      "mimeType": "image/png",
+      "sizes": [
+        "460x460"
+      ],
+      "theme": "dark"
+    }
+  ],
   "packages": [
     {
-      "registryType": "oci",
-      "identifier": "ghcr.io/jmagar/gotify-rmcp:0.1.2",
-      "version": "0.1.2",
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "gotify-rmcp",
+      "version": "0.1.3",
+      "runtimeHint": "npx",
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp",
+          "description": "Run Gotify RMCP over stdio.",
+          "format": "string",
+          "isRequired": true,
+          "isSecret": false,
+          "isRepeated": false
+        }
+      ],
       "environmentVariables": [
         {
           "name": "GOTIFY_URL",
-          "description": "Base URL of your Gotify server, e.g. https://gotify.example.com.",
+          "description": "Gotify server base URL.",
+          "format": "string",
           "isRequired": true,
-          "isSecret": false
+          "isSecret": false,
+          "placeholder": "https://gotify.example.com"
         },
         {
           "name": "GOTIFY_CLIENT_TOKEN",
-          "description": "Gotify client token (starts with C) for management operations — list/create/delete apps, clients, and messages.",
-          "isRequired": true,
+          "description": "Gotify client token for read and management actions.",
+          "format": "string",
+          "isRequired": false,
           "isSecret": true
         },
         {
           "name": "GOTIFY_APP_TOKEN",
-          "description": "Gotify application token (starts with A) used exclusively for sending messages via POST /message.",
-          "isRequired": true,
+          "description": "Gotify app token for sending notifications.",
+          "format": "string",
+          "isRequired": false,
           "isSecret": true
         },
         {
-          "name": "GOTIFY_MCP_TOKEN",
-          "description": "Bearer token for MCP HTTP endpoint authentication. Generate with: openssl rand -hex 32.",
+          "name": "GOTIFY_RMCP_VERSION",
+          "description": "Optional GitHub release tag override for the downloaded Gotify RMCP binary.",
+          "format": "string",
           "isRequired": false,
-          "isSecret": true
+          "isSecret": false,
+          "placeholder": "v0.1.2"
+        },
+        {
+          "name": "GOTIFY_RMCP_REPO",
+          "description": "Optional GitHub owner/repo override for release asset downloads.",
+          "format": "string",
+          "isRequired": false,
+          "isSecret": false,
+          "default": "jmagar/gotify-rmcp",
+          "placeholder": "jmagar/gotify-rmcp"
+        },
+        {
+          "name": "GOTIFY_RMCP_RELEASE_BASE_URL",
+          "description": "Optional release download base URL override.",
+          "format": "string",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "RUST_LOG",
+          "description": "Tracing filter for Gotify RMCP logs.",
+          "format": "string",
+          "isRequired": false,
+          "isSecret": false,
+          "default": "info",
+          "placeholder": "info"
         }
-      ]
+      ],
+      "transport": {
+        "type": "stdio"
+      }
     }
   ],
-  "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://gotify-rmcp.tootie.tv/mcp"
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "namespace": "ai.dinglebear",
+      "dnsDomain": "dinglebear.ai",
+      "distribution": {
+        "npm": "gotify-rmcp@0.1.3",
+        "nodePackage": "gotify-rmcp"
+      },
+      "buildInfo": {
+        "version": "0.1.3",
+        "repository": "https://github.com/jmagar/gotify-rmcp"
+      }
     }
-  ]
+  }
 }
