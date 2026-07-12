@@ -1,7 +1,7 @@
 {
   "name": "gotify-rmcp",
   "version": "0.1.2",
-  "description": "Node launcher for the gotify-rmcp Rust MCP server and rgotify CLI binary.",
+  "description": "Node launcher for the Gotify Rust MCP server and rgotify CLI for push notifications over stdio or HTTP.",
   "license": "MIT",
   "homepage": "https://github.com/jmagar/gotify-rmcp#readme",
   "repository": {
@@ -32,7 +32,21 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "rmcp",
+    "rust",
     "gotify",
-    "notifications"
+    "notifications",
+    "push-notifications",
+    "homelab",
+    "cli",
+    "claude-code",
+    "codex",
+    "gemini",
+    "automation",
+    "oauth",
+    "http-server",
+    "stdio"
   ]
 }
