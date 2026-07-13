@@ -1,4 +1,0 @@
-[build]
-# Keep completed Cargo binary artifacts in ./bin without committing them.
-rustc-wrapper = "scripts/cargo-rustc-wrapper"
-

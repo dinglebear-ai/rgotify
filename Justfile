@@ -123,6 +123,9 @@ build-plugin: release
     install -m 755 "$target_dir/release/rgotify" bin/rgotify
     install -m 755 "$target_dir/release/rgotify" plugins/gotify/bin/rgotify
 
+# Explicit binary artifact sync. This replaces hidden Cargo rustc-wrapper side effects.
+sync-bin: build-plugin
+
 # Publish: bump version, tag, push (triggers crates.io + Docker publish)
 publish bump="patch":
     #!/usr/bin/env bash
