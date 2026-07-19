@@ -20,8 +20,8 @@ x-common-service: &common-service
 services:
   gotify-mcp:
     <<: *common-service
-    image: ghcr.io/jmagar/rustify:${RUSTIFY_VERSION:-latest}
-    container_name: gotify-mcp
+    image: ghcr.io/jmagar/rustify:latest
+    container_name: rgotify
     env_file:
       - path: .env
         required: false
@@ -38,7 +38,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256M
+          memory: 2G
           cpus: '0.5'
 
 networks:
