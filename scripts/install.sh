@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="${GOTIFY_RMCP_REPO:-jmagar/gotify-rmcp}"
+REPO="${GOTIFY_RMCP_REPO:-jmagar/rgotify}"
 INSTALL_DIR="${INSTALL_DIR:-${HOME}/.local/bin}"
 VERSION="${GOTIFY_RMCP_VERSION:-latest}"
 RELEASE_BASE_URL="${GOTIFY_RMCP_RELEASE_BASE_URL:-}"
@@ -14,7 +14,7 @@ Install rgotify from GitHub Releases.
 Environment:
   INSTALL_DIR      Destination directory (default: ~/.local/bin)
   GOTIFY_RMCP_VERSION Release tag such as v0.1.1 (default: latest)
-  GOTIFY_RMCP_REPO    GitHub repo owner/name (default: jmagar/gotify-rmcp)
+  GOTIFY_RMCP_REPO    GitHub repo owner/name (default: jmagar/rgotify)
 USAGE
 }
 

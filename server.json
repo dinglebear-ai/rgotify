@@ -4,9 +4,9 @@
   "title": "Gotify RMCP",
   "description": "Rust MCP server and CLI for Gotify push notifications and message management.",
   "version": "0.1.3",
-  "websiteUrl": "https://github.com/jmagar/gotify-rmcp",
+  "websiteUrl": "https://github.com/jmagar/rgotify",
   "repository": {
-    "url": "https://github.com/jmagar/gotify-rmcp",
+    "url": "https://github.com/jmagar/rgotify",
     "source": "github",
     "id": "1238227288"
   },
@@ -75,8 +75,8 @@
           "format": "string",
           "isRequired": false,
           "isSecret": false,
-          "default": "jmagar/gotify-rmcp",
-          "placeholder": "jmagar/gotify-rmcp"
+          "default": "jmagar/rgotify",
+          "placeholder": "jmagar/rgotify"
         },
         {
           "name": "GOTIFY_RMCP_RELEASE_BASE_URL",
@@ -110,7 +110,7 @@
       },
       "buildInfo": {
         "version": "0.1.3",
-        "repository": "https://github.com/jmagar/gotify-rmcp"
+        "repository": "https://github.com/jmagar/rgotify"
       }
     }
   }

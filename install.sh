@@ -4,7 +4,7 @@
 # Downloads the gotify binary to ~/.local/bin and writes a starter .env file.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/jmagar/gotify-rmcp/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/jmagar/rgotify/main/install.sh | bash
 #   # or locally:
 #   bash install.sh [--version 0.1.0] [--bin-dir /usr/local/bin]
 #
@@ -15,7 +15,7 @@
 
 set -euo pipefail
 
-REPO="jmagar/gotify-rmcp"
+REPO="jmagar/rgotify"
 BINARY="gotify"
 SERVICE="gotify"
 DEFAULT_BIN_DIR="${HOME}/.local/bin"

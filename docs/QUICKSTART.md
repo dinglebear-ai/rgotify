@@ -24,7 +24,7 @@ You need two tokens. Create them in the Gotify web UI:
 ## Step 2: Build
 
 ```bash
-git clone https://github.com/jmagar/gotify-rmcp
+git clone https://github.com/jmagar/rgotify
 cd gotify-rmcp
 cargo build --release
 ```

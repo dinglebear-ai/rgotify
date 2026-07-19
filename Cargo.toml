@@ -5,8 +5,8 @@ edition = "2021"
 rust-version = "1.86"
 categories = ["command-line-utilities", "development-tools"]
 keywords = ["mcp", "gotify", "notifications", "rmcp", "homelab"]
-repository = "https://github.com/jmagar/gotify-rmcp"
-homepage = "https://github.com/jmagar/gotify-rmcp#readme"
+repository = "https://github.com/jmagar/rgotify"
+homepage = "https://github.com/jmagar/rgotify#readme"
 description = "Rust MCP server and CLI for Gotify push notifications with stdio/HTTP transports, auth, and plugin packaging."
 autobins = false
 

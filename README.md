@@ -47,7 +47,7 @@ tokens through MCP tool arguments.
 | Surface | This repo |
 |---|---|
 | Repository | `gotify-rmcp` |
-| Rust crate | `gotify-mcp` |
+| Rust crate | `gotify-rmcp` |
 | Binary / CLI | `rgotify` |
 | npm package | `gotify-rmcp` |
 | npm binary aliases | `gotify-rmcp`, `rgotify` |
@@ -78,7 +78,7 @@ the short Rust CLI name `rgotify`.
 | Path | Command | Best for | Notes |
 |---|---|---|---|
 | npm / npx | `npx -y gotify-rmcp --help` | Local MCP clients and quick trials. | Downloads the matching `rgotify` binary from GitHub Releases. |
-| Release installer | `curl -fsSL https://raw.githubusercontent.com/jmagar/gotify-rmcp/main/scripts/install.sh \| bash` | Host installs without Node. | Installs `rgotify` for the current Linux host. |
+| Release installer | `curl -fsSL https://raw.githubusercontent.com/jmagar/rgotify/main/scripts/install.sh \| bash` | Host installs without Node. | Installs `rgotify` for the current Linux host. |
 | Docker / Compose | `docker compose up -d` | Shared HTTP MCP deployments. | Reads `.env` and exposes container port `40020`. |
 | Build from source | `cargo build --release` | Development and audits. | Produces `target/release/rgotify`. |
 | Plugin | `claude plugin install plugins/gotify` | Claude Code local plugin setup from this checkout. | Uses the packaged setup hook and local runtime metadata. |
@@ -106,7 +106,7 @@ behavior only when testing packaging:
 ### Build From Source
 
 ```bash
-git clone https://github.com/jmagar/gotify-rmcp
+git clone https://github.com/jmagar/rgotify
 cd gotify-rmcp
 cargo build --release
 ./target/release/rgotify --help
@@ -501,18 +501,19 @@ rgotify setup check
 
 ## Related Servers
 
-- `unifi-rmcp` / `rustifi` - UniFi controller REST API bridge.
-- `tailscale-rmcp` / `rustscale` - Tailscale API bridge for devices, users, and tailnet operations.
-- `unraid-rmcp` / `unrust` - Unraid GraphQL bridge for NAS and server management.
-- `apprise-rmcp` - Apprise notification fan-out bridge for many delivery backends.
-- `arcane-rmcp` - Arcane Docker management bridge for containers and related resources.
-- `yarr-rmcp` - Media-stack bridge for Sonarr, Radarr, Prowlarr, Plex, and related services.
-- `ytdl-mcp` - Media download and metadata workflow server.
-- `synapse` - Local Synapse workflow server for scout and flux actions.
-- `cortex` - Syslog and homelab log aggregation MCP server.
-- `axon` - RAG, crawl, scrape, extract, and semantic search project.
-- `lab` - Homelab control plane and Labby gateway project.
-- `soma` - RMCP scaffold/runtime template for new provider-backed servers.
+- [soma](https://github.com/jmagar/soma) - RMCP runtime for provider-backed MCP servers.
+- [unifi-rmcp](https://github.com/jmagar/runifi) - UniFi controller REST API bridge.
+- [tailscale-rmcp](https://github.com/jmagar/rtailscale) - Tailscale API bridge for devices, users, and tailnet operations.
+- [unraid-rmcp](https://github.com/jmagar/runraid) - Unraid GraphQL bridge for NAS and server management.
+- [apprise-rmcp](https://github.com/jmagar/rapprise) - Apprise notification fan-out bridge for many delivery backends.
+- [arcane-rmcp](https://github.com/jmagar/rarcane) - Arcane Docker management bridge for containers and related resources.
+- [yarr](https://github.com/jmagar/yarr) - Media-stack bridge for Sonarr, Radarr, Prowlarr, Plex, and related services.
+- [ytdl-rmcp](https://github.com/jmagar/rytdl) - Media download and metadata workflow server.
+- [synapse-rmcp](https://github.com/jmagar/synapse) - Local Synapse workflow server for scout and flux actions.
+- [cortex](https://github.com/jmagar/cortex) - Syslog and homelab log aggregation MCP server.
+- [axon](https://github.com/jmagar/axon) - RAG, crawl, scrape, extract, and semantic search project.
+- [labby](https://github.com/jmagar/labby) - Homelab control plane and MCP gateway project.
+- [lumen](https://github.com/jmagar/lumen) - Local semantic code search MCP server.
 
 ## Documentation
 
