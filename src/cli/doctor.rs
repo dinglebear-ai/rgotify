@@ -1,5 +1,5 @@
 use std::net::TcpListener;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::time::{Duration, Instant};
 
 use anyhow::Result;
@@ -62,7 +62,7 @@ impl DoctorCheck {
 
 // ── Individual check helpers ──────────────────────────────────────────────────
 
-fn check_config_file(data_dir: &PathBuf) -> DoctorCheck {
+fn check_config_file(data_dir: &Path) -> DoctorCheck {
     let path = data_dir.join("config.toml");
     if path.exists() {
         DoctorCheck::pass("config", "Config file", path.display().to_string())
@@ -137,14 +137,12 @@ fn check_binary_in_path(binary: &str) -> DoctorCheck {
     let path_var = std::env::var_os("PATH").unwrap_or_default();
     for dir in std::env::split_paths(&path_var) {
         let candidate = dir.join(binary);
-        if candidate.is_file() {
-            if is_executable(&candidate) {
-                return DoctorCheck::pass(
-                    "config",
-                    format!("Binary in PATH: {binary}"),
-                    candidate.display().to_string(),
-                );
-            }
+        if candidate.is_file() && is_executable(&candidate) {
+            return DoctorCheck::pass(
+                "config",
+                format!("Binary in PATH: {binary}"),
+                candidate.display().to_string(),
+            );
         }
     }
     DoctorCheck::fail(
@@ -175,7 +173,7 @@ fn check_required_env(var_name: &str, hint: &str) -> DoctorCheck {
             var_name,
             format!(
                 "{} (set)",
-                &v[..v.len().min(8).max(1)].replace(|_: char| true, "*")
+                v[..v.len().clamp(1, 8)].replace(|_: char| true, "*")
             ),
         ),
         _ => DoctorCheck::fail("credentials", var_name, hint),
@@ -189,7 +187,7 @@ fn check_optional_env(var_name: &str, hint: &str) -> DoctorCheck {
             var_name,
             format!(
                 "{} (set)",
-                &v[..v.len().min(8).max(1)].replace(|_: char| true, "*")
+                v[..v.len().clamp(1, 8)].replace(|_: char| true, "*")
             ),
         ),
         _ => DoctorCheck::warn("credentials", var_name, hint),
@@ -383,27 +381,26 @@ fn print_doctor_report(checks: &[DoctorCheck]) {
 
 pub async fn run_doctor(mcp_port: u16, json: bool) -> Result<()> {
     let data_dir = gotify_mcp::config::default_data_dir();
-    let mut checks: Vec<DoctorCheck> = Vec::new();
-
-    // ── Config ────────────────────────────────────────────────────────────────
-    checks.push(check_config_file(&data_dir));
-    checks.push(check_dir_writable("Data directory", &data_dir));
-    checks.push(check_dir_writable("Log directory", &data_dir.join("logs")));
-    checks.push(check_binary_in_path("rgotify"));
-
-    // ── Credentials ───────────────────────────────────────────────────────────
-    checks.push(check_required_env(
-        "GOTIFY_URL",
-        "Set GOTIFY_URL in ~/.gotify/.env or your environment (e.g. https://gotify.example.com)",
-    ));
-    checks.push(check_required_env(
-        "GOTIFY_CLIENT_TOKEN",
-        "Set GOTIFY_CLIENT_TOKEN — a client token (starts with C) from the Gotify dashboard",
-    ));
-    checks.push(check_optional_env(
-        "GOTIFY_APP_TOKEN",
-        "Set GOTIFY_APP_TOKEN to send messages — an app token (starts with A) from the Gotify dashboard",
-    ));
+    let mut checks: Vec<DoctorCheck> = vec![
+        // ── Config ────────────────────────────────────────────────────────────
+        check_config_file(&data_dir),
+        check_dir_writable("Data directory", &data_dir),
+        check_dir_writable("Log directory", &data_dir.join("logs")),
+        check_binary_in_path("rgotify"),
+        // ── Credentials ───────────────────────────────────────────────────────
+        check_required_env(
+            "GOTIFY_URL",
+            "Set GOTIFY_URL in ~/.gotify/.env or your environment (e.g. https://gotify.example.com)",
+        ),
+        check_required_env(
+            "GOTIFY_CLIENT_TOKEN",
+            "Set GOTIFY_CLIENT_TOKEN — a client token (starts with C) from the Gotify dashboard",
+        ),
+        check_optional_env(
+            "GOTIFY_APP_TOKEN",
+            "Set GOTIFY_APP_TOKEN to send messages — an app token (starts with A) from the Gotify dashboard",
+        ),
+    ];
 
     // Token prefix validation (warn only)
     if let Some(c) = check_token_prefix("GOTIFY_CLIENT_TOKEN", 'C', "Client") {

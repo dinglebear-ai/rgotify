@@ -157,10 +157,9 @@ impl GotifyClient {
             .send()
             .await
             .context("health check failed")
-            .and_then(|r| {
+            .inspect(|r| {
                 let _ = r.status();
                 // parse synchronously not possible here — handled below
-                Ok(r)
             });
 
         match result {

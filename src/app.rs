@@ -151,16 +151,16 @@ impl GotifyService {
             } else {
                 e
             }
-        }).and_then(|result| {
+        }).map(|result| {
             if result.as_array().map(|a| a.is_empty()).unwrap_or(false) {
-                Ok(json!({
+                json!({
                     "clients": [],
                     "total": 0,
                     "hint": "No clients found. Check GOTIFY_CLIENT_TOKEN is a valid client token \
                              and that the Gotify server has clients configured."
-                }))
+                })
             } else {
-                Ok(result)
+                result
             }
         })
     }

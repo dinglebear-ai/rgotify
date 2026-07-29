@@ -285,8 +285,8 @@ fn fmt_messages(data: &Value) {
 
 fn print_msg_table(msgs: &[Value]) {
     println!(
-        "{:>6}  {:>4}  {:<20}  {:<32}  {}",
-        "ID", "PRI", "APP", "TITLE", "MESSAGE"
+        "{:>6}  {:>4}  {:<20}  {:<32}  MESSAGE",
+        "ID", "PRI", "APP", "TITLE"
     );
     for m in msgs {
         let id = m["id"].as_i64().unwrap_or(0);
@@ -312,8 +312,8 @@ fn fmt_applications(data: &Value) {
         }
     };
     println!(
-        "{:>4}  {:<32}  {:<8}  {}",
-        "ID", "NAME", "PRIORITY", "DESCRIPTION"
+        "{:>4}  {:<32}  {:<8}  DESCRIPTION",
+        "ID", "NAME", "PRIORITY"
     );
     for a in apps {
         println!(
@@ -335,7 +335,7 @@ fn fmt_clients(data: &Value) {
             return;
         }
     };
-    println!("{:>4}  {:<32}  {}", "ID", "NAME", "TOKEN");
+    println!("{:>4}  {:<32}  TOKEN", "ID", "NAME");
     for c in clients {
         println!(
             "{:>4}  {:<32}  {}",

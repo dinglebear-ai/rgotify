@@ -2,7 +2,7 @@
 name = "gotify-mcp"
 version = "0.1.2"
 edition = "2024"
-rust-version = "1.92"
+rust-version = "1.97.1"
 categories = ["command-line-utilities", "development-tools"]
 keywords = ["mcp", "gotify", "notifications", "rmcp", "homelab"]
 repository = "https://github.com/jmagar/rgotify"
