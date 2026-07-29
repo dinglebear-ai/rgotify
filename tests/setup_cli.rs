@@ -51,7 +51,7 @@ fn setup_plugin_hook_no_repair_json_contract() {
     assert!(!home.path().join(".gotify-test").exists());
 }
 
-/// The hook now calls the binary directly (no plugin-setup.sh wrapper). This
+/// `setup plugin-hook` is a manual command (the plugin ships no hooks). This
 /// verifies `apply_plugin_options()` maps `CLAUDE_PLUGIN_OPTION_*` into the
 /// `GOTIFY_*` env vars the setup checks read: `CLAUDE_PLUGIN_DATA` reaches
 /// `appdata_dir` and `CLAUDE_PLUGIN_OPTION_MCP_PORT` reaches `port_check`.
@@ -103,20 +103,21 @@ fn plugin_hook_maps_plugin_options_into_env() {
     );
 }
 
-/// The plugin hook config must call the binary directly.
+/// The plugin ships no Claude Code hooks. `setup plugin-hook` remains a
+/// supported manual command, but nothing auto-invokes it.
 #[test]
-fn claude_hooks_call_binary_directly() {
-    let hooks_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("plugins/gotify/hooks/hooks.json");
-    let hooks: serde_json::Value =
-        serde_json::from_str(&fs::read_to_string(hooks_path).unwrap()).unwrap();
-    for hook_name in ["SessionStart", "ConfigChange"] {
-        let command = hooks["hooks"][hook_name][0]["hooks"][0]["command"]
-            .as_str()
-            .unwrap();
-        assert_eq!(
-            command,
-            "${CLAUDE_PLUGIN_ROOT}/bin/rgotify setup plugin-hook"
-        );
-    }
+fn plugin_ships_no_hooks() {
+    let plugin_root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("plugins/gotify");
+    assert!(
+        !plugin_root.join("hooks").exists(),
+        "plugin hooks were removed; setup is run manually via `rgotify setup`"
+    );
+    let manifest: serde_json::Value = serde_json::from_str(
+        &fs::read_to_string(plugin_root.join(".claude-plugin/plugin.json")).unwrap(),
+    )
+    .unwrap();
+    assert!(
+        manifest.get("hooks").is_none(),
+        "plugin manifest must not declare hooks"
+    );
 }

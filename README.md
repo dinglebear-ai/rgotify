@@ -46,17 +46,19 @@ tokens through MCP tool arguments.
 
 | Surface | This repo |
 |---|---|
-| Repository | `gotify-rmcp` |
-| Rust crate | `gotify-rmcp` |
+| Repository | `dinglebear-ai/rgotify` |
+| Rust crate (Cargo package) | `gotify-mcp` |
 | Binary / CLI | `rgotify` |
 | npm package | `gotify-rmcp` |
 | npm binary aliases | `gotify-rmcp`, `rgotify` |
 | MCP tool | `gotify` |
+| MCP registry name | `ai.dinglebear/gotify-rmcp` |
 | Config home | `~/.gotify` on hosts, `/data` in containers |
 | Env prefixes | `GOTIFY_*`, `GOTIFY_MCP_*`, `GOTIFY_RMCP_*` for npm launcher controls |
 
-The repo and npm package use the RMCP family name, while the shipped binary uses
-the short Rust CLI name `rgotify`.
+These names intentionally differ. The npm package and registry entry use the
+RMCP family name, the Cargo package is `gotify-mcp`, the git repo is `rgotify`,
+and the shipped binary uses the short Rust CLI name `rgotify`.
 
 ## Capabilities And Boundaries
 
@@ -78,10 +80,10 @@ the short Rust CLI name `rgotify`.
 | Path | Command | Best for | Notes |
 |---|---|---|---|
 | npm / npx | `npx -y gotify-rmcp --help` | Local MCP clients and quick trials. | Downloads the matching `rgotify` binary from GitHub Releases. |
-| Release installer | `curl -fsSL https://raw.githubusercontent.com/jmagar/rgotify/main/scripts/install.sh \| bash` | Host installs without Node. | Installs `rgotify` for the current Linux host. |
+| Release installer | `curl -fsSL https://raw.githubusercontent.com/dinglebear-ai/rgotify/main/scripts/install.sh \| bash` | Host installs without Node. | Installs `rgotify` for the current Linux host. |
 | Docker / Compose | `docker compose up -d` | Shared HTTP MCP deployments. | Reads `.env` and exposes container port `40020`. |
 | Build from source | `cargo build --release` | Development and audits. | Produces `target/release/rgotify`. |
-| Plugin | `claude plugin install plugins/gotify` | Claude Code local plugin setup from this checkout. | Uses the packaged setup hook and local runtime metadata. |
+| Plugin | `claude plugin install plugins/gotify` | Claude Code local plugin setup from this checkout. | Ships no hooks — run `rgotify setup repair` once by hand afterwards. |
 
 ### npm / npx
 
@@ -106,8 +108,8 @@ behavior only when testing packaging:
 ### Build From Source
 
 ```bash
-git clone https://github.com/jmagar/rgotify
-cd gotify-rmcp
+git clone https://github.com/dinglebear-ai/rgotify
+cd rgotify
 cargo build --release
 ./target/release/rgotify --help
 ```
@@ -305,6 +307,7 @@ rgotify clients [--json]
 
 rgotify send <message> [--title T] [--priority N] [--json]
 rgotify create app <name> [--description D] [--priority N] [--json]
+rgotify update app <app_id> [--name N] [--description D] [--priority N] [--json]
 rgotify create client <name> [--json]
 
 rgotify delete message <id> [--confirm] [--json]
@@ -318,8 +321,13 @@ rgotify mcp
 rgotify doctor [--json]
 rgotify setup check [--json]
 rgotify setup repair [--json]
+rgotify setup install [--json]
 rgotify setup plugin-hook [--no-repair] [--json]
 ```
+
+Hyphenated aliases are accepted for the two-word forms: `create-app`,
+`update-app`, `create-client`, `delete-message`, `delete-all`, `delete-app`,
+`delete-client`.
 
 Known parity exception: MCP `action=status` is MCP-only observability. The CLI
 equivalent for operator checks is `rgotify doctor --json`.
@@ -352,7 +360,24 @@ hosts or `/data/.env` in containers without overriding already-set variables.
 | `GOTIFY_MCP_GOOGLE_CLIENT_ID` | empty | Google OAuth client ID. |
 | `GOTIFY_MCP_GOOGLE_CLIENT_SECRET` | empty | Google OAuth client secret. |
 | `GOTIFY_MCP_AUTH_ADMIN_EMAIL` | empty | Initial/admin OAuth email. |
+| `GOTIFY_MCP_AUTH_SQLITE_PATH` | `<data>/auth.db` | OAuth state database path. |
+| `GOTIFY_MCP_AUTH_KEY_PATH` | `<data>/auth-jwt.pem` | OAuth JWT signing key path. |
+| `GOTIFY_MCP_ALLOWED_HOSTS` | empty | Comma-separated `Host` header allowlist. |
+| `GOTIFY_MCP_ALLOWED_ORIGINS` | empty | Comma-separated `Origin` header allowlist. |
+| `GOTIFY_NOAUTH` | `false` | Escape hatch permitting a non-loopback bind with no auth. See below. |
+| `GOTIFY_MCP_HOME` | `~/.gotify` or `/data` | Override the appdata dir used by `rgotify setup`. |
+| `RUNNING_IN_CONTAINER` | unset | Forces the `/data` appdata path. |
 | `RUST_LOG` | `info` | Rust log filter. Stdio logs must stay off stdout. |
+
+`GOTIFY_MCP` is also the `lab-auth` env prefix, so `lab-auth` reads further
+`GOTIFY_MCP_*` keys beyond those listed here.
+
+### Startup Bind Guard
+
+The server refuses to start when it would bind a non-loopback host with no
+authentication configured. To bind `0.0.0.0`, set `GOTIFY_MCP_TOKEN`, or use
+`GOTIFY_MCP_AUTH_MODE=oauth`, or — only when an upstream gateway genuinely
+enforces auth — set `GOTIFY_NOAUTH=true`.
 
 ## Authentication
 
@@ -422,7 +447,7 @@ Gotify API behavior stay outside the MCP and CLI shims.
 | GitHub Releases | `.github/workflows/*`, `scripts/install.sh` | Package version, binary name, checksums, supported platforms. |
 | Docker / Compose | `config/Dockerfile`, `docker-compose*.yml` | Exposed port `40020`, healthcheck `/health`, env file contract. |
 | MCP registry | `server.json` | Server identity `tv.tootie/gotify-rmcp`, env vars, transport URL, package version. |
-| Plugin | `plugins/gotify` | Runtime command, setup hook, user config, bundled metadata. |
+| Plugin | `plugins/gotify` | Runtime command, user config, bundled metadata. No hooks are shipped. |
 | Docs | `README.md`, `docs/INVENTORY.md`, `docs/QUICKSTART.md` | Current binary name, default port, action list, and env names. |
 
 Release invariant: npm package version, Rust crate version, `server.json.version`,
@@ -483,10 +508,23 @@ and configure bearer or OAuth auth before exposing the server beyond loopback.
 
 ### Plugin
 
+The plugin ships **no Claude Code hooks**, so nothing runs setup for you. Run it
+once by hand after installing or updating the plugin:
+
 ```bash
 claude plugin install plugins/gotify
-rgotify setup check
+
+rgotify setup repair     # create ~/.gotify and its .env, then re-check
+rgotify setup install    # copy the binary into ~/.local/bin so it is on PATH
+rgotify setup check      # read-only verification
 ```
+
+`rgotify setup repair` creates the appdata dir and a placeholder `.env`;
+`rgotify setup install` keeps a terminal-callable copy in `~/.local/bin` (repeat
+it after `/plugin update`). `rgotify setup check` verifies appdata, `.env`,
+binary-on-PATH, and that port 40020 is free. The server itself takes its config
+from the plugin's `.mcp.json` `${user_config.*}` block, so these commands
+bootstrap the local environment rather than configure the server.
 
 ## Troubleshooting
 
@@ -501,18 +539,18 @@ rgotify setup check
 
 ## Related Servers
 
-- [soma](https://github.com/jmagar/soma) - RMCP runtime for provider-backed MCP servers.
-- [unifi-rmcp](https://github.com/jmagar/runifi) - UniFi controller REST API bridge.
-- [tailscale-rmcp](https://github.com/jmagar/rtailscale) - Tailscale API bridge for devices, users, and tailnet operations.
-- [unraid-rmcp](https://github.com/jmagar/runraid) - Unraid GraphQL bridge for NAS and server management.
-- [apprise-rmcp](https://github.com/jmagar/rapprise) - Apprise notification fan-out bridge for many delivery backends.
-- [arcane-rmcp](https://github.com/jmagar/rarcane) - Arcane Docker management bridge for containers and related resources.
-- [yarr](https://github.com/jmagar/yarr) - Media-stack bridge for Sonarr, Radarr, Prowlarr, Plex, and related services.
-- [ytdl-rmcp](https://github.com/jmagar/rytdl) - Media download and metadata workflow server.
-- [synapse-rmcp](https://github.com/jmagar/synapse) - Local Synapse workflow server for scout and flux actions.
-- [cortex](https://github.com/jmagar/cortex) - Syslog and homelab log aggregation MCP server.
-- [axon](https://github.com/jmagar/axon) - RAG, crawl, scrape, extract, and semantic search project.
-- [labby](https://github.com/jmagar/labby) - Homelab control plane and MCP gateway project.
+- [soma](https://github.com/dinglebear-ai/soma) - RMCP runtime for provider-backed MCP servers.
+- [unifi-rmcp](https://github.com/dinglebear-ai/runifi) - UniFi controller REST API bridge.
+- [tailscale-rmcp](https://github.com/dinglebear-ai/rtailscale) - Tailscale API bridge for devices, users, and tailnet operations.
+- [unraid](https://github.com/dinglebear-ai/unraid) - Unraid monorepo: GraphQL MCP bridges (`runraid`) and Unraid plugins.
+- [apprise-rmcp](https://github.com/dinglebear-ai/rapprise) - Apprise notification fan-out bridge for many delivery backends.
+- [arcane-rmcp](https://github.com/dinglebear-ai/rarcane) - Arcane Docker management bridge for containers and related resources.
+- [yarr](https://github.com/dinglebear-ai/yarr) - Media-stack bridge for Sonarr, Radarr, Prowlarr, Plex, and related services.
+- [ytdl-rmcp](https://github.com/dinglebear-ai/rytdl) - Media download and metadata workflow server.
+- [synapse-rmcp](https://github.com/dinglebear-ai/synapse) - Local Synapse workflow server for scout and flux actions.
+- [cortex](https://github.com/dinglebear-ai/cortex) - Syslog and homelab log aggregation MCP server.
+- [axon](https://github.com/dinglebear-ai/axon) - RAG, crawl, scrape, extract, and semantic search project.
+- [labby](https://github.com/dinglebear-ai/labby) - Homelab control plane and MCP gateway project.
 - [lumen](https://github.com/jmagar/lumen) - Local semantic code search MCP server.
 
 ## Documentation

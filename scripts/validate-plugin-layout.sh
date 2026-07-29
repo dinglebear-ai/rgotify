@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Validate plugin manifests, hooks, MCP config, and skills for this repo.
+# Validate plugin manifests, MCP config, and skills for this repo.
 set -euo pipefail
 
 plugin_root="${PLUGIN_ROOT:-}"
@@ -14,10 +14,9 @@ command -v jq >/dev/null 2>&1 || { echo "MISSING: jq"; exit 1; }
 claude_manifest="${plugin_root}/.claude-plugin/plugin.json"
 codex_manifest="${plugin_root}/.codex-plugin/plugin.json"
 mcp_json="${plugin_root}/.mcp.json"
-hooks_json="${plugin_root}/hooks/hooks.json"
 skills_dir="${plugin_root}/skills"
 
-for file in "${claude_manifest}" "${codex_manifest}" "${mcp_json}" "${hooks_json}"; do
+for file in "${claude_manifest}" "${codex_manifest}" "${mcp_json}"; do
   [[ -f "${file}" ]] || { echo "MISSING: ${file}"; exit 1; }
   jq empty "${file}"
 done
@@ -30,8 +29,16 @@ for file in "${claude_manifest}" "${codex_manifest}"; do
 done
 
 jq -er '.mcpServers | type == "object" and length > 0' "${mcp_json}" >/dev/null
-jq -er '.hooks.SessionStart[]?.hooks[]?.command == "${CLAUDE_PLUGIN_ROOT}/scripts/plugin-setup.sh"' "${hooks_json}" >/dev/null
-jq -er '.hooks.ConfigChange[]? | select(.matcher == "user_settings") | .hooks[]?.command == "${CLAUDE_PLUGIN_ROOT}/scripts/plugin-setup.sh"' "${hooks_json}" >/dev/null
+
+# The plugin ships no Claude Code hooks: setup is run manually via `rgotify setup`.
+if [[ -e "${plugin_root}/hooks" ]]; then
+  echo "FORBIDDEN: ${plugin_root}/hooks (plugin hooks were removed)"
+  exit 1
+fi
+[[ "$(jq -er 'has("hooks")' "${claude_manifest}")" == "false" ]] || {
+  echo "FORBIDDEN: ${claude_manifest} contains hooks"
+  exit 1
+}
 
 [[ -d "${skills_dir}" ]] || { echo "MISSING: ${skills_dir}"; exit 1; }
 skill_count=0

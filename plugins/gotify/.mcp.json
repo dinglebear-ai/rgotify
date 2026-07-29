@@ -2,7 +2,20 @@
   "mcpServers": {
     "gotify": {
       "command": "npx",
-      "args": ["-y", "gotify-rmcp"]
+      "args": ["-y", "gotify-rmcp", "mcp"],
+      "env": {
+        "GOTIFY_URL": "${user_config.gotify_url}",
+        "GOTIFY_CLIENT_TOKEN": "${user_config.gotify_client_token}",
+        "GOTIFY_APP_TOKEN": "${user_config.gotify_app_token}",
+        "GOTIFY_ALLOW_DESTRUCTIVE": "${user_config.allow_destructive}",
+        "GOTIFY_MCP_TOKEN": "${user_config.api_token}",
+        "GOTIFY_MCP_NO_AUTH": "${user_config.no_auth}",
+        "GOTIFY_MCP_AUTH_MODE": "${user_config.auth_mode}",
+        "GOTIFY_MCP_PUBLIC_URL": "${user_config.public_url}",
+        "GOTIFY_MCP_GOOGLE_CLIENT_ID": "${user_config.google_client_id}",
+        "GOTIFY_MCP_GOOGLE_CLIENT_SECRET": "${user_config.google_client_secret}",
+        "GOTIFY_MCP_AUTH_ADMIN_EMAIL": "${user_config.auth_admin_email}"
+      }
     }
   }
 }

@@ -160,12 +160,15 @@ fn install_self() -> Result<PathBuf> {
 /// Translate Claude Code plugin options (`CLAUDE_PLUGIN_OPTION_*`) into the
 /// `GOTIFY_*` process env vars the binary reads, plus the appdata HOME var.
 ///
-/// This replaces the former `plugin-setup.sh` wrapper: the binary now owns the
-/// env-var mapping itself, so the plugin hook calls the binary directly. The
-/// setup checks (`appdata_dir`, `port_check`, `binary_check`) read these live
-/// from `std::env`, so mapping here — before `check_report()` — is what makes
-/// them effective. Values containing newlines/CR are skipped, mirroring the
-/// script's `reject_unsafe_value` guard.
+/// The binary owns this env-var mapping itself (it replaced a `plugin-setup.sh`
+/// wrapper that has since been removed along with the plugin's hooks). The setup
+/// checks (`appdata_dir`, `port_check`, `binary_check`) read these live from
+/// `std::env`, so mapping here — before `check_report()` — is what makes them
+/// effective. Values containing newlines/CR are skipped.
+///
+/// Nothing invokes this automatically any more: the plugin ships no hooks, so
+/// `setup plugin-hook` is a manual command. It stays useful when a Claude Code
+/// plugin environment is present and you want the option values honored.
 ///
 /// The script's `.env`-fallback (re-exporting a previously persisted value when
 /// an option was unset) is intentionally dropped: the binary never persists
@@ -221,7 +224,7 @@ fn apply_plugin_options() {
 
 fn plugin_hook_report(no_repair: bool) -> Result<PluginHookReport> {
     // Translate CLAUDE_PLUGIN_OPTION_* into GOTIFY_* env vars before any setup
-    // check reads them. Replaces the deleted plugin-setup.sh wrapper.
+    // check reads them.
     apply_plugin_options();
     // Keep the user's terminal copy in ~/.local/bin fresh each session so it
     // survives `/plugin update`. Best-effort: never fail the hook over it.
