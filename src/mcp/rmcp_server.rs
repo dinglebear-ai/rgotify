@@ -3,10 +3,11 @@ use std::{borrow::Cow, net::Ipv6Addr, sync::Arc, time::Instant};
 use lab_auth::AuthContext;
 use rmcp::{
     model::{
-        CallToolRequestParams, CallToolResult, Content, GetPromptRequestParams, GetPromptResult,
-        Implementation, ListPromptsResult, ListResourcesResult, ListToolsResult,
-        PaginatedRequestParams, RawResource, ReadResourceRequestParams, ReadResourceResult,
-        Resource, ResourceContents, ServerCapabilities, ServerInfo, Tool,
+        CallToolRequestParams, CallToolResponse, CallToolResult, ContentBlock,
+        GetPromptRequestParams, GetPromptResponse, Implementation, ListPromptsResult,
+        ListResourcesResult, ListToolsResult, PaginatedRequestParams,
+        ReadResourceRequestParams, ReadResourceResponse, ReadResourceResult, Resource,
+        ResourceContents, ServerCapabilities, ServerInfo, Tool,
     },
     service::RequestContext,
     transport::streamable_http_server::{
@@ -63,7 +64,7 @@ impl ServerHandler for GotifyRmcpServer {
         &self,
         request: CallToolRequestParams,
         context: RequestContext<RoleServer>,
-    ) -> Result<CallToolResult, ErrorData> {
+    ) -> Result<CallToolResponse, ErrorData> {
         let tool_name = request.name.to_string();
 
         let action: String = request
@@ -110,9 +111,10 @@ impl ServerHandler for GotifyRmcpServer {
                     error = %error,
                     "MCP tool execution failed"
                 );
-                Ok(CallToolResult::error(vec![Content::text(format!(
+                Ok(CallToolResult::error(vec![ContentBlock::text(format!(
                     "Tool execution failed for action '{action}'. Check server logs for details."
-                ))]))
+                ))])
+                .into())
             }
         }
     }
@@ -135,7 +137,7 @@ impl ServerHandler for GotifyRmcpServer {
         &self,
         request: ReadResourceRequestParams,
         context: RequestContext<RoleServer>,
-    ) -> Result<ReadResourceResult, ErrorData> {
+    ) -> Result<ReadResourceResponse, ErrorData> {
         require_auth_context(&self.state, &context)?;
         if request.uri != SCHEMA_RESOURCE_URI {
             return Err(ErrorData::invalid_params(
@@ -150,7 +152,9 @@ impl ServerHandler for GotifyRmcpServer {
             text,
             SCHEMA_RESOURCE_URI,
         )
-        .with_mime_type("application/json")]))
+        .with_mime_type("application/json")]
+        )
+        .into())
     }
 
     // ── prompts ───────────────────────────────────────────────────────────────
@@ -168,9 +172,11 @@ impl ServerHandler for GotifyRmcpServer {
         &self,
         request: GetPromptRequestParams,
         context: RequestContext<RoleServer>,
-    ) -> Result<GetPromptResult, ErrorData> {
+    ) -> Result<GetPromptResponse, ErrorData> {
         require_auth_context(&self.state, &context)?;
-        prompts::get_prompt(request).map_err(|e| ErrorData::invalid_params(e.to_string(), None))
+        prompts::get_prompt(request)
+            .map(Into::into)
+            .map_err(|e| ErrorData::invalid_params(e.to_string(), None))
     }
 
     // ── server info ───────────────────────────────────────────────────────────
@@ -194,7 +200,7 @@ impl ServerHandler for GotifyRmcpServer {
 
 pub fn streamable_http_config(config: &McpConfig) -> StreamableHttpServerConfig {
     StreamableHttpServerConfig::default()
-        .with_stateful_mode(false)
+        .with_legacy_session_mode(false)
         .with_json_response(true)
         .with_allowed_hosts(allowed_hosts(config))
         .with_allowed_origins(allowed_origins(config))
@@ -220,12 +226,9 @@ pub fn streamable_http_service(
 const SCHEMA_RESOURCE_URI: &str = "gotify://schema/mcp-tool";
 
 fn schema_resource() -> Resource {
-    Resource::new(
-        RawResource::new(SCHEMA_RESOURCE_URI, "gotify tool schema")
-            .with_description("JSON schema for the gotify MCP tool and its action-based parameters")
-            .with_mime_type("application/json"),
-        None,
-    )
+    Resource::new(SCHEMA_RESOURCE_URI, "gotify tool schema")
+        .with_description("JSON schema for the gotify MCP tool and its action-based parameters")
+        .with_mime_type("application/json")
 }
 
 // ── tool definition conversion ────────────────────────────────────────────────
@@ -258,10 +261,10 @@ fn rmcp_tool_from_json(value: Value) -> Result<Tool, ErrorData> {
     ))
 }
 
-fn tool_result_from_json(value: Value) -> Result<CallToolResult, ErrorData> {
+fn tool_result_from_json(value: Value) -> Result<CallToolResponse, ErrorData> {
     let text = serde_json::to_string_pretty(&value)
         .map_err(|e| ErrorData::internal_error(format!("serialization error: {e}"), None))?;
-    Ok(CallToolResult::success(vec![Content::text(text)]))
+    Ok(CallToolResult::success(vec![ContentBlock::text(text)]).into())
 }
 
 // ── auth helpers ──────────────────────────────────────────────────────────────

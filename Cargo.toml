@@ -1,8 +1,8 @@
 [package]
 name = "gotify-mcp"
 version = "0.1.2"
-edition = "2021"
-rust-version = "1.86"
+edition = "2024"
+rust-version = "1.92"
 categories = ["command-line-utilities", "development-tools"]
 keywords = ["mcp", "gotify", "notifications", "rmcp", "homelab"]
 repository = "https://github.com/jmagar/rgotify"
@@ -20,7 +20,7 @@ tokio = { version = "1", features = ["full"] }
 
 # HTTP / MCP transport
 axum = "0.8"
-rmcp = { version = "1.6.0", default-features = false, features = [
+rmcp = { version = "=3.0.0-beta.2", default-features = false, features = [
   "server",
   "macros",
   "transport-streamable-http-server",
@@ -61,7 +61,10 @@ test-support = []
 gotify-mcp = { path = ".", features = ["test-support"] }
 tempfile = "3"
 tower = { version = "0.5", features = ["util"] }
-rmcp = { version = "1.6.0", default-features = false, features = [
+rmcp = { version = "=3.0.0-beta.2", default-features = false, features = [
   "client",
   "transport-child-process",
 ] }
+
+[lints.clippy]
+mod_module_files = "deny"   # forbid mod.rs — enforce foo.rs sibling to foo/ style
