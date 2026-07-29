@@ -14,7 +14,7 @@ Rust MCP server bridging agents to a [Gotify](https://gotify.net/) push notifica
 | npm package | `gotify-rmcp` |
 | MCP tool | `gotify` |
 | Edition | 2021 |
-| MSRV | 1.86 |
+| MSRV | 1.97.1 |
 | Service port | **40020** (RMCP Streamable HTTP) |
 | Config home | `~/.gotify` on hosts, `/data` in containers |
 
@@ -22,7 +22,7 @@ The repo, crate, binary, and npm package deliberately have four different names.
 
 ### rmcp version
 
-`Cargo.toml` **declares** `rmcp = "1.6.0"`, but the caret range resolves to **1.7.0** in `Cargo.lock`. The lock is the truth — when checking API compatibility, read 1.7.0 docs, not 1.6.0. The declared version is not a real pin.
+`Cargo.toml` pins **`rmcp = "=3.0.0-beta.2"`** exactly. Declared and locked agree, and the `=` prevents the caret drift this repo previously suffered (it declared 1.6.0 while the lock had moved on). `rmcp-macros` resolves to `3.0.0` as a transitive of the `macros` feature — do not pin it to the beta, it will not resolve.
 
 `lab-auth` is pinned by git rev to `dinglebear-ai/labby` (crate `lab-auth`, distinct from that workspace's own `labby-auth`).
 

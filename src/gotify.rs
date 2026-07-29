@@ -3,7 +3,7 @@ use std::time::Duration;
 
 use anyhow::{Context, Result};
 use reqwest::Client;
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 
 use crate::config::GotifyConfig;
 use crate::observability::Counters;

@@ -23,7 +23,6 @@ pub struct GotifyConfig {
     pub allow_destructive: bool,
 }
 
-
 /// MCP HTTP server configuration
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(default)]
