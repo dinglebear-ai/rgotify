@@ -40,6 +40,16 @@ if [ -f "gemini-extension.json" ]; then
   [ -n "$v" ] && versions+=("gemini-extension.json=$v") && files_checked+=("gemini-extension.json")
 fi
 
+if [ -f "server.json" ]; then
+  v=$(grep -m1 '"version"[[:space:]]*:' server.json | sed 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/')
+  [ -n "$v" ] && versions+=("server.json=$v") && files_checked+=("server.json")
+
+  while IFS= read -r package_version; do
+    [ -n "$package_version" ] || continue
+    versions+=("server.json package=$package_version")
+  done < <(grep '"version"[[:space:]]*:' server.json | tail -n +2 | sed 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/')
+fi
+
 # Need at least one version source
 if [ ${#versions[@]} -eq 0 ]; then
   echo "[version-sync] No version-bearing files found — skipping"

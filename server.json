@@ -3,7 +3,7 @@
   "name": "ai.dinglebear/gotify-rmcp",
   "title": "Gotify RMCP",
   "description": "Rust MCP server and CLI for Gotify push notifications and message management.",
-  "version": "0.1.3",
+  "version": "0.1.2",
   "websiteUrl": "https://github.com/jmagar/rgotify",
   "repository": {
     "url": "https://github.com/jmagar/rgotify",
@@ -25,7 +25,7 @@
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "gotify-rmcp",
-      "version": "0.1.3",
+      "version": "0.1.2",
       "runtimeHint": "npx",
       "packageArguments": [
         {
@@ -105,11 +105,11 @@
       "namespace": "ai.dinglebear",
       "dnsDomain": "dinglebear.ai",
       "distribution": {
-        "npm": "gotify-rmcp@0.1.3",
+        "npm": "gotify-rmcp@0.1.2",
         "nodePackage": "gotify-rmcp"
       },
       "buildInfo": {
-        "version": "0.1.3",
+        "version": "0.1.2",
         "repository": "https://github.com/jmagar/rgotify"
       }
     }
