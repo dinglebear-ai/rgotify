@@ -34,7 +34,7 @@ function releaseVersion(env = process.env) {
 }
 
 function releaseBaseUrl(env = process.env) {
-  const repo = env.GOTIFY_RMCP_REPO || "jmagar/rgotify";
+  const repo = env.GOTIFY_RMCP_REPO || "dinglebear-ai/rgotify";
   return env.GOTIFY_RMCP_RELEASE_BASE_URL || `https://github.com/${repo}/releases/download`;
 }
 

@@ -7,9 +7,9 @@ use gotify_mcp::{
     gotify::GotifyClient,
     mcp::{self, AppState, AuthPolicy},
 };
-use rmcp::{transport::stdio, ServiceExt};
+use rmcp::{ServiceExt, transport::stdio};
 use tracing::info;
-use tracing_subscriber::{fmt, EnvFilter};
+use tracing_subscriber::{EnvFilter, fmt};
 
 mod cli;
 

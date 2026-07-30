@@ -1,7 +1,7 @@
 pub mod doctor;
 pub mod setup;
 
-use anyhow::{bail, Result};
+use anyhow::{Result, bail};
 use serde_json::Value;
 
 use gotify_mcp::app::GotifyService;

@@ -1,17 +1,17 @@
 use axum::{
-    body::{to_bytes, Body},
-    http::{header, Request, StatusCode},
     Router,
+    body::{Body, to_bytes},
+    http::{Request, StatusCode, header},
 };
 use rmcp::{
-    transport::streamable_http_server::{
-        session::local::LocalSessionManager, StreamableHttpServerConfig, StreamableHttpService,
-    },
     ServerHandler,
+    transport::streamable_http_server::{
+        StreamableHttpServerConfig, StreamableHttpService, session::local::LocalSessionManager,
+    },
 };
 use tower::util::ServiceExt;
 
-const INIT_BODY: &str = r#"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"rmcp-compat","version":"1.0"}}}"#;
+const INIT_BODY: &str = r#"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"rmcp-compat","version":"1.0"}}}"#;
 const ACCEPT_STREAMABLE_HTTP: &str = "application/json, text/event-stream";
 
 #[derive(Clone)]

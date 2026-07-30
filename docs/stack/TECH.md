@@ -1,3 +1,9 @@
+---
+title: "Technology Choices - gotify-rmcp"
+created: "2026-07-30"
+updated: "2026-07-30"
+---
+
 # Technology Choices — gotify-rmcp
 
 Technology stack reference and rationale.

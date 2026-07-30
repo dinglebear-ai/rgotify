@@ -1,3 +1,9 @@
+---
+title: "Quickstart - gotify-rmcp"
+created: "2026-07-30"
+updated: "2026-07-30"
+---
+
 # Quickstart — gotify-rmcp
 
 Get Claude sending push notifications to your Gotify server in 5 minutes.
@@ -24,7 +30,7 @@ You need two tokens. Create them in the Gotify web UI:
 ## Step 2: Build
 
 ```bash
-git clone https://github.com/jmagar/rgotify
+git clone https://github.com/dinglebear-ai/rgotify
 cd gotify-rmcp
 cargo build --release
 ```

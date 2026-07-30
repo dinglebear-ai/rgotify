@@ -1,7 +1,6 @@
 # gotify-rmcp
 
-`gotify-rmcp` is a Rust MCP server and CLI for connecting agents to a
-self-hosted [Gotify](https://gotify.net/) push notification server.
+MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.
 
 It exposes one MCP tool, `gotify`, plus the `rgotify` CLI. Agents can send
 notifications, inspect server health, list messages, and manage Gotify apps and
@@ -551,7 +550,7 @@ bootstrap the local environment rather than configure the server.
 - [cortex](https://github.com/dinglebear-ai/cortex) - Syslog and homelab log aggregation MCP server.
 - [axon](https://github.com/dinglebear-ai/axon) - RAG, crawl, scrape, extract, and semantic search project.
 - [labby](https://github.com/dinglebear-ai/labby) - Homelab control plane and MCP gateway project.
-- [lumen](https://github.com/jmagar/lumen) - Local semantic code search MCP server.
+- [lumen](https://github.com/dinglebear-ai/lumen) - Local semantic code search MCP server.
 
 ## Documentation
 

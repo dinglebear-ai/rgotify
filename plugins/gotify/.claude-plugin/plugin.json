@@ -1,10 +1,11 @@
 {
   "name": "gotify",
-  "description": "Gotify push notification server via MCP",
+  "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
   "author": {
     "name": "jmagar"
   },
-  "repository": "https://github.com/jmagar/gotify-mcp",
+  "homepage": "https://rgotify.dinglebear.ai",
+  "repository": "https://github.com/dinglebear-ai/rgotify",
   "license": "MIT",
   "keywords": [
     "gotify",
