@@ -1,3 +1,5 @@
+//! Rgotify command-line and MCP server entry point.
+
 use anyhow::Result;
 use std::sync::Arc;
 

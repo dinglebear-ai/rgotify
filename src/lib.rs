@@ -1,3 +1,5 @@
+//! Core Gotify client, service, configuration, and MCP transport library.
+
 pub mod app;
 pub mod config;
 pub mod gotify;
