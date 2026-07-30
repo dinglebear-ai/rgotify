@@ -12,20 +12,13 @@ permissions:
 jobs:
   npm:
     name: npm launcher
-    runs-on: [self-hosted, unraid]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      # Guards the version drift that let server.json and package.json sit at
-      # 0.1.3 while Cargo.toml and the release-please manifest stayed at 0.1.2.
-      - name: Check version sync
-        run: bash scripts/check-version-sync.sh
-
-      - name: Test npm launcher
-        run: npm test --prefix packages/gotify-rmcp
-      - name: Check npm launcher syntax
-        run: npm run check --prefix packages/gotify-rmcp
-      - name: Dry-run npm package
-        run: npm pack --dry-run --json ./packages/gotify-rmcp
+    uses: dinglebear-ai/workflows/.github/workflows/fast-node.yml@d7bbe71ddc1157e32ed0bebf928fc07438ba58b0
+    with:
+      working-directory: packages/gotify-rmcp
+      enable-cache: false
+      install-command: "true"
+      audit-command: ""
+      lint-command: ""
+      typecheck-command: ""
+      test-command: npm test
+      contract-command: npm run check && npm pack --dry-run --json
