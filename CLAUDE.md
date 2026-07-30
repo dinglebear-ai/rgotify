@@ -8,13 +8,13 @@ Rust MCP server bridging agents to a [Gotify](https://gotify.net/) push notifica
 |------|-------|
 | Remote | `git@github.com:dinglebear-ai/rgotify.git` |
 | Default branch | `main` |
-| Layout | **Single crate — not a cargo workspace** |
+| Layout | Single-package Cargo workspace |
 | Cargo package | `gotify-mcp` |
 | Binary / CLI | `rgotify` (`[[bin]]`, `autobins = false`) |
 | npm package | `gotify-rmcp` |
 | MCP tool | `gotify` |
-| Edition | 2021 |
-| MSRV | 1.86 |
+| Edition | 2024 |
+| MSRV | 1.97.1 |
 | Service port | **40020** (RMCP Streamable HTTP) |
 | Config home | `~/.gotify` on hosts, `/data` in containers |
 
@@ -22,7 +22,8 @@ The repo, crate, binary, and npm package deliberately have four different names.
 
 ### rmcp version
 
-`Cargo.toml` **declares** `rmcp = "1.6.0"`, but the caret range resolves to **1.7.0** in `Cargo.lock`. The lock is the truth — when checking API compatibility, read 1.7.0 docs, not 1.6.0. The declared version is not a real pin.
+`Cargo.toml` exactly pins `rmcp = "=3.0.0-beta.2"` through
+`[workspace.dependencies]`, matching `Cargo.lock`.
 
 `lab-auth` is pinned by git rev to `dinglebear-ai/labby` (crate `lab-auth`, distinct from that workspace's own `labby-auth`).
 

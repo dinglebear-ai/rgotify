@@ -1,8 +1,8 @@
 {
   "name": "gotify-mcp",
-  "description": "Gotify push notification server MCP bridge — send alerts, manage apps and clients, browse message history.",
-  "homepage": "https://github.com/jmagar/gotify-mcp",
-  "repository": "https://github.com/jmagar/gotify-mcp",
+  "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
+  "homepage": "https://rgotify.dinglebear.ai",
+  "repository": "https://github.com/dinglebear-ai/rgotify",
   "license": "MIT",
   "keywords": [
     "gotify",
@@ -23,7 +23,7 @@
       "Read",
       "Write"
     ],
-    "websiteURL": "https://github.com/jmagar/gotify-mcp",
+    "websiteURL": "https://github.com/dinglebear-ai/rgotify",
     "defaultPrompt": [
       "Send a notification saying the backup completed successfully.",
       "List recent messages from my Gotify server.",

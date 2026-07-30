@@ -6,7 +6,7 @@
 
 use axum::{
     body::to_bytes,
-    http::{header, Request, StatusCode},
+    http::{Request, StatusCode, header},
 };
 use gotify_mcp::{mcp::router, testing};
 use lab_auth::jwt::AccessClaims;

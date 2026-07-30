@@ -22,23 +22,23 @@
 use std::sync::{Arc, Mutex};
 
 use axum::{
-    body::{to_bytes, Body},
+    Router,
+    body::{Body, to_bytes},
     extract::Request,
-    http::{header, StatusCode},
+    http::{StatusCode, header},
     middleware::{self, Next},
     response::Response,
-    Router,
 };
 use rmcp::{
+    ErrorData, RoleServer, ServerHandler,
     model::{
         CallToolRequestParams, CallToolResponse, CallToolResult, ContentBlock, ListToolsResult,
         PaginatedRequestParams, ServerCapabilities, ServerInfo, Tool,
     },
     service::RequestContext,
     transport::streamable_http_server::{
-        session::local::LocalSessionManager, StreamableHttpServerConfig, StreamableHttpService,
+        StreamableHttpServerConfig, StreamableHttpService, session::local::LocalSessionManager,
     },
-    ErrorData, RoleServer, ServerHandler,
 };
 use tower::util::ServiceExt;
 
@@ -173,7 +173,7 @@ async fn post_json(
     (status, headers, body)
 }
 
-const INIT_BODY: &str = r#"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"spike","version":"1.0"}}}"#;
+const INIT_BODY: &str = r#"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"spike","version":"1.0"}}}"#;
 const CALL_BODY: &str =
     r#"{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"whoami","arguments":{}}}"#;
 

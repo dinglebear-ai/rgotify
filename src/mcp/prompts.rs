@@ -1,6 +1,5 @@
 use rmcp::model::{
-    GetPromptRequestParams, GetPromptResult, ListPromptsResult, Prompt, PromptMessage,
-    Role,
+    GetPromptRequestParams, GetPromptResult, ListPromptsResult, Prompt, PromptMessage, Role,
 };
 
 pub(super) fn list_prompts() -> ListPromptsResult {

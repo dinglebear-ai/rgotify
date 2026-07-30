@@ -1,4 +1,4 @@
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 
 pub(super) const GOTIFY_ACTIONS: &[&str] = &[
     "health",
@@ -7,6 +7,7 @@ pub(super) const GOTIFY_ACTIONS: &[&str] = &[
     "messages",
     "applications",
     "clients",
+    "status",
     "send",
     "create_application",
     "update_application",

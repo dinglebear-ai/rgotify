@@ -2,11 +2,11 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.dinglebear/gotify-rmcp",
   "title": "Gotify RMCP",
-  "description": "Rust MCP server and CLI for Gotify push notifications and message management.",
+  "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
   "version": "0.1.2",
-  "websiteUrl": "https://github.com/jmagar/rgotify",
+  "websiteUrl": "https://rgotify.dinglebear.ai",
   "repository": {
-    "url": "https://github.com/jmagar/rgotify",
+    "url": "https://github.com/dinglebear-ai/rgotify",
     "source": "github",
     "id": "1238227288"
   },
@@ -75,8 +75,8 @@
           "format": "string",
           "isRequired": false,
           "isSecret": false,
-          "default": "jmagar/rgotify",
-          "placeholder": "jmagar/rgotify"
+          "default": "dinglebear-ai/rgotify",
+          "placeholder": "dinglebear-ai/rgotify"
         },
         {
           "name": "GOTIFY_RMCP_RELEASE_BASE_URL",
@@ -110,7 +110,7 @@
       },
       "buildInfo": {
         "version": "0.1.2",
-        "repository": "https://github.com/jmagar/rgotify"
+        "repository": "https://github.com/dinglebear-ai/rgotify"
       }
     }
   }

@@ -1,16 +1,16 @@
 {
   "name": "gotify-rmcp",
   "version": "0.1.2",
-  "description": "Node launcher for the Gotify Rust MCP server and rgotify CLI for push notifications over stdio or HTTP.",
+  "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
   "license": "MIT",
-  "homepage": "https://github.com/jmagar/rgotify#readme",
+  "homepage": "https://rgotify.dinglebear.ai",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jmagar/rgotify.git",
+    "url": "git+https://github.com/dinglebear-ai/rgotify.git",
     "directory": "packages/gotify-rmcp"
   },
   "bugs": {
-    "url": "https://github.com/jmagar/rgotify/issues"
+    "url": "https://github.com/dinglebear-ai/rgotify/issues"
   },
   "bin": {
     "gotify-rmcp": "bin/rgotify.js",

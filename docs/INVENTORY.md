@@ -1,3 +1,9 @@
+---
+title: "Component Inventory - gotify-rmcp"
+created: "2026-07-30"
+updated: "2026-07-30"
+---
+
 # Component Inventory — gotify-rmcp
 
 Complete listing of all MCP actions, CLI commands, environment variables, and HTTP endpoints.

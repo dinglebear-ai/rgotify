@@ -235,7 +235,7 @@ async fn check_upstream(url: &str) -> DoctorCheck {
                 "connectivity",
                 "Upstream reachable",
                 format!("failed to build HTTP client: {e}"),
-            )
+            );
         }
     };
     let start = Instant::now();

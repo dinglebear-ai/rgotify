@@ -1,7 +1,7 @@
 use std::net::TcpListener;
 use std::path::PathBuf;
 
-use anyhow::{bail, Result};
+use anyhow::{Result, bail};
 use serde::Serialize;
 
 const BINARY_NAME: &str = "rgotify";
@@ -14,7 +14,9 @@ pub enum SetupCommand {
     /// Copy this binary into ~/.local/bin so it is callable as a bare command
     /// in the user's own terminal, independent of Claude Code.
     Install,
-    PluginHook { no_repair: bool },
+    PluginHook {
+        no_repair: bool,
+    },
 }
 
 impl SetupCommand {
@@ -203,7 +205,10 @@ fn apply_plugin_options() {
             "GOTIFY_MCP_AUTH_ADMIN_EMAIL",
         ),
         ("CLAUDE_PLUGIN_OPTION_GOTIFY_URL", "GOTIFY_URL"),
-        ("CLAUDE_PLUGIN_OPTION_GOTIFY_CLIENT_TOKEN", "GOTIFY_CLIENT_TOKEN"),
+        (
+            "CLAUDE_PLUGIN_OPTION_GOTIFY_CLIENT_TOKEN",
+            "GOTIFY_CLIENT_TOKEN",
+        ),
         ("CLAUDE_PLUGIN_OPTION_GOTIFY_APP_TOKEN", "GOTIFY_APP_TOKEN"),
         (
             "CLAUDE_PLUGIN_OPTION_ALLOW_DESTRUCTIVE",

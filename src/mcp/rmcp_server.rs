@@ -2,24 +2,24 @@ use std::{borrow::Cow, net::Ipv6Addr, sync::Arc, time::Instant};
 
 use lab_auth::AuthContext;
 use rmcp::{
+    ErrorData, RoleServer, ServerHandler,
     model::{
         CallToolRequestParams, CallToolResponse, CallToolResult, ContentBlock,
         GetPromptRequestParams, GetPromptResponse, Implementation, ListPromptsResult,
-        ListResourcesResult, ListToolsResult, PaginatedRequestParams,
-        ReadResourceRequestParams, ReadResourceResponse, ReadResourceResult, Resource,
-        ResourceContents, ServerCapabilities, ServerInfo, Tool,
+        ListResourcesResult, ListToolsResult, PaginatedRequestParams, ReadResourceRequestParams,
+        ReadResourceResponse, ReadResourceResult, Resource, ResourceContents, ServerCapabilities,
+        ServerInfo, Tool,
     },
     service::RequestContext,
     transport::streamable_http_server::{
-        session::local::LocalSessionManager, StreamableHttpServerConfig, StreamableHttpService,
+        StreamableHttpServerConfig, StreamableHttpService, session::local::LocalSessionManager,
     },
-    ErrorData, RoleServer, ServerHandler,
 };
 use serde_json::{Map, Value};
 
 use crate::config::McpConfig;
 
-use super::{prompts, schemas::tool_definitions, tools::execute_tool, AppState, AuthPolicy};
+use super::{AppState, AuthPolicy, prompts, schemas::tool_definitions, tools::execute_tool};
 
 const READ_SCOPE: &str = "gotify:read";
 const DENY_SCOPE: &str = "gotify:__deny__";
@@ -148,12 +148,9 @@ impl ServerHandler for GotifyRmcpServer {
         let schema = tool_definitions();
         let text = serde_json::to_string_pretty(&schema)
             .map_err(|e| ErrorData::internal_error(format!("serialization error: {e}"), None))?;
-        Ok(ReadResourceResult::new(vec![ResourceContents::text(
-            text,
-            SCHEMA_RESOURCE_URI,
-        )
-        .with_mime_type("application/json")]
-        )
+        Ok(ReadResourceResult::new(vec![
+            ResourceContents::text(text, SCHEMA_RESOURCE_URI).with_mime_type("application/json"),
+        ])
         .into())
     }
 

@@ -1,5 +1,7 @@
 ---
 title: "Rust Build Setup"
+created: "2026-07-30"
+updated: "2026-07-30"
 doc_type: "guide"
 status: "active"
 owner: "gotify-rmcp"
@@ -9,14 +11,14 @@ audience:
 scope: "service"
 source_of_truth: false
 upstream_refs:
-  - "https://github.com/jmagar/soma/blob/main/docs/RUST.md"
+  - "https://github.com/dinglebear-ai/soma/blob/main/docs/RUST.md"
 last_reviewed: "2026-07-13"
 ---
 
 # Rust Build Setup
 
 This repo follows the build conventions of the rmcp server family.
-The canonical reference is [soma/docs/RUST.md](https://github.com/jmagar/soma/blob/main/docs/RUST.md).
+The canonical reference is [soma/docs/RUST.md](https://github.com/dinglebear-ai/soma/blob/main/docs/RUST.md).
 
 ## System prerequisites
 
@@ -27,7 +29,7 @@ The canonical reference is [soma/docs/RUST.md](https://github.com/jmagar/soma/bl
 ## Global Cargo config
 
 Build performance depends on `~/.cargo/config.toml` on the developer's machine.
-See [soma/docs/RUST.md](https://github.com/jmagar/soma/blob/main/docs/RUST.md)
+See [soma/docs/RUST.md](https://github.com/dinglebear-ai/soma/blob/main/docs/RUST.md)
 for the expected config (global sccache wrapper, mold linker, profile settings,
 and dynamic Cargo job allocation).
 

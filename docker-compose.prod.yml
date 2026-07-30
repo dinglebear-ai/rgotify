@@ -20,7 +20,7 @@ x-common-service: &common-service
 services:
   gotify-mcp:
     <<: *common-service
-    image: ghcr.io/jmagar/rustify:latest
+    image: ghcr.io/dinglebear-ai/rgotify:latest
     container_name: rgotify
     env_file:
       - path: .env
