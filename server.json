@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "ai.dinglebear/gotify-rmcp",
+  "name": "ai.dinglebear/rgotify",
   "title": "Gotify RMCP",
   "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
   "version": "0.1.2",
@@ -24,7 +24,7 @@
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "gotify-rmcp",
+      "identifier": "@dinglebear/rgotify-mcp",
       "version": "0.1.2",
       "runtimeHint": "npx",
       "packageArguments": [
@@ -105,8 +105,8 @@
       "namespace": "ai.dinglebear",
       "dnsDomain": "dinglebear.ai",
       "distribution": {
-        "npm": "gotify-rmcp@0.1.2",
-        "nodePackage": "gotify-rmcp"
+        "npm": "@dinglebear/rgotify-mcp@0.1.2",
+        "nodePackage": "@dinglebear/rgotify-mcp"
       },
       "buildInfo": {
         "version": "0.1.2",
