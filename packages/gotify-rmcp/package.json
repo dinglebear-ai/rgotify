@@ -1,5 +1,5 @@
 {
-  "name": "gotify-rmcp",
+  "name": "@dinglebear/rgotify",
   "version": "0.1.2",
   "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
   "license": "MIT",
@@ -53,10 +53,13 @@
     "http-server",
     "stdio"
   ],
-  "mcpName": "ai.dinglebear/gotify-rmcp",
+  "mcpName": "ai.dinglebear/rgotify",
   "binaryVersion": "0.1.2",
   "author": {
     "name": "dinglebear.ai",
     "url": "https://dinglebear.ai"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

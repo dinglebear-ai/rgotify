@@ -63,8 +63,8 @@
   ],
   "packages": {
     ".": {
-      "package-name": "gotify-rmcp",
-      "component": "gotify-rmcp",
+      "package-name": "@dinglebear/rgotify",
+      "component": "@dinglebear/rgotify",
       "changelog-path": "CHANGELOG.md",
       "extra-files": [
         "packages/gotify-rmcp/package.json",
@@ -76,7 +76,7 @@
         {
           "type": "json",
           "path": "server.json",
-          "jsonpath": "$.packages[?(@.identifier == 'gotify-rmcp')].version"
+          "jsonpath": "$.packages[?(@.identifier == '@dinglebear/rgotify')].version"
         },
         {
           "type": "json",

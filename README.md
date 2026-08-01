@@ -6,8 +6,8 @@ It exposes one MCP tool, `gotify`, plus the `rgotify` CLI. Agents can send
 notifications, inspect server health, list messages, and manage Gotify apps and
 clients through stdio MCP, Streamable HTTP MCP, or direct shell commands.
 
-**30-second path:** set `GOTIFY_URL`, then run `npx -y gotify-rmcp health --json`
--> start loopback HTTP with `GOTIFY_MCP_HOST=127.0.0.1 npx -y gotify-rmcp serve`
+**30-second path:** set `GOTIFY_URL`, then run `npx -y @dinglebear/rgotify health --json`
+-> start loopback HTTP with `GOTIFY_MCP_HOST=127.0.0.1 npx -y @dinglebear/rgotify serve`
 -> call `tools/call` with `{"action":"health"}`.
 
 **Status:** operational RMCP upstream-client server. Write-capable; destructive
@@ -48,10 +48,10 @@ tokens through MCP tool arguments.
 | Repository | `dinglebear-ai/rgotify` |
 | Rust crate (Cargo package) | `gotify-mcp` |
 | Binary / CLI | `rgotify` |
-| npm package | `gotify-rmcp` |
+| npm package | `@dinglebear/rgotify` |
 | npm binary aliases | `gotify-rmcp`, `rgotify` |
 | MCP tool | `gotify` |
-| MCP registry name | `ai.dinglebear/gotify-rmcp` |
+| MCP registry name | `ai.dinglebear/rgotify` |
 | Config home | `~/.gotify` on hosts, `/data` in containers |
 | Env prefixes | `GOTIFY_*`, `GOTIFY_MCP_*`, `GOTIFY_RMCP_*` for npm launcher controls |
 
@@ -78,7 +78,7 @@ and the shipped binary uses the short Rust CLI name `rgotify`.
 
 | Path | Command | Best for | Notes |
 |---|---|---|---|
-| npm / npx | `npx -y gotify-rmcp --help` | Local MCP clients and quick trials. | Downloads the matching `rgotify` binary from GitHub Releases. |
+| npm / npx | `npx -y @dinglebear/rgotify --help` | Local MCP clients and quick trials. | Downloads the matching `rgotify` binary from GitHub Releases. |
 | Release installer | `curl -fsSL https://raw.githubusercontent.com/dinglebear-ai/rgotify/main/scripts/install.sh \| bash` | Host installs without Node. | Installs `rgotify` for the current Linux host. |
 | Docker / Compose | `docker compose up -d` | Shared HTTP MCP deployments. | Reads `.env` and exposes container port `40020`. |
 | Build from source | `cargo build --release` | Development and audits. | Produces `target/release/rgotify`. |
@@ -89,9 +89,9 @@ and the shipped binary uses the short Rust CLI name `rgotify`.
 Run the stdio MCP server or CLI without a manual binary install:
 
 ```bash
-npx -y gotify-rmcp --help
-npx -y gotify-rmcp mcp
-npx -y gotify-rmcp health --json
+npx -y @dinglebear/rgotify --help
+npx -y @dinglebear/rgotify mcp
+npx -y @dinglebear/rgotify health --json
 ```
 
 The npm package downloads `rgotify` during `postinstall`. Override download
@@ -142,13 +142,13 @@ Token roles:
 ### 2. Run A Safe CLI Call
 
 ```bash
-npx -y gotify-rmcp health --json
+npx -y @dinglebear/rgotify health --json
 ```
 
 ### 3. Start Loopback HTTP MCP
 
 ```bash
-GOTIFY_MCP_HOST=127.0.0.1 npx -y gotify-rmcp serve
+GOTIFY_MCP_HOST=127.0.0.1 npx -y @dinglebear/rgotify serve
 ```
 
 In another shell:
@@ -233,7 +233,7 @@ config files, or the MCP client's secret storage.
 
 | Surface | Status | Entry point | Purpose |
 |---|---:|---|---|
-| MCP stdio | Supported | `rgotify mcp`, `npx -y gotify-rmcp mcp` | Local child-process MCP clients. |
+| MCP stdio | Supported | `rgotify mcp`, `npx -y @dinglebear/rgotify mcp` | Local child-process MCP clients. |
 | MCP HTTP | Supported | `rgotify serve`, `POST /mcp` | Streamable HTTP MCP for local or shared server deployments. |
 | CLI | Supported | `rgotify <command>` | Scriptable parity and debugging. |
 | Prompts | Supported | `send_notification`, `check_status` | Reusable agent prompts. |

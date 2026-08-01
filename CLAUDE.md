@@ -11,7 +11,7 @@ Rust MCP server bridging agents to a [Gotify](https://gotify.net/) push notifica
 | Layout | Single-package Cargo workspace |
 | Cargo package | `gotify-mcp` |
 | Binary / CLI | `rgotify` (`[[bin]]`, `autobins = false`) |
-| npm package | `gotify-rmcp` |
+| npm package | `@dinglebear/rgotify` (`packages/gotify-rmcp/`) |
 | MCP tool | `gotify` |
 | Edition | 2024 |
 | MSRV | 1.97.1 |
@@ -227,7 +227,7 @@ Do not add Docker Compose, systemd, or service-bootstrap logic into the `setup` 
 | `Cargo.toml` / `Cargo.lock` | Crate metadata, dependencies (lock is the version truth) |
 | `config.toml` | Local dev config (not committed with secrets) |
 | `.env.example` | Documented env template |
-| `server.json` | MCP registry metadata (`ai.dinglebear/gotify-rmcp`) |
+| `server.json` | MCP registry metadata (`ai.dinglebear/rgotify`) |
 | `Justfile` | Task runner — build, validate, sync-bin, release helpers |
 | `install.sh` / `scripts/install.sh` | Host installer |
 | `scripts/validate-plugin-layout.sh` | Plugin manifest / MCP config / skills validator |
