@@ -1,5 +1,5 @@
 {
-  "name": "@dinglebear/rgotify-mcp",
+  "name": "@dinglebear/rgotify",
   "version": "0.1.2",
   "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
   "license": "MIT",

@@ -24,7 +24,7 @@
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "@dinglebear/rgotify-mcp",
+      "identifier": "@dinglebear/rgotify",
       "version": "0.1.2",
       "runtimeHint": "npx",
       "packageArguments": [
@@ -105,8 +105,8 @@
       "namespace": "ai.dinglebear",
       "dnsDomain": "dinglebear.ai",
       "distribution": {
-        "npm": "@dinglebear/rgotify-mcp@0.1.2",
-        "nodePackage": "@dinglebear/rgotify-mcp"
+        "npm": "@dinglebear/rgotify@0.1.2",
+        "nodePackage": "@dinglebear/rgotify"
       },
       "buildInfo": {
         "version": "0.1.2",

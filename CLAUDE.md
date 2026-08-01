@@ -11,7 +11,7 @@ Rust MCP server bridging agents to a [Gotify](https://gotify.net/) push notifica
 | Layout | Single-package Cargo workspace |
 | Cargo package | `gotify-mcp` |
 | Binary / CLI | `rgotify` (`[[bin]]`, `autobins = false`) |
-| npm package | `@dinglebear/rgotify-mcp` (`packages/gotify-rmcp/`) |
+| npm package | `@dinglebear/rgotify` (`packages/gotify-rmcp/`) |
 | MCP tool | `gotify` |
 | Edition | 2024 |
 | MSRV | 1.97.1 |
