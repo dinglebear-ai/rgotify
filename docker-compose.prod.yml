@@ -26,7 +26,8 @@ services:
       - path: .env
         required: false
     ports:
-      - "${GOTIFY_MCP_PORT:-40020}:40020/tcp"
+      - "100.88.16.79:${GOTIFY_MCP_PORT:-40020}:40020/tcp"
+      - "10.1.0.6:${GOTIFY_MCP_PORT:-40020}:40020/tcp"
     volumes:
       - ${HOME}/.gotify:/data
     healthcheck:
