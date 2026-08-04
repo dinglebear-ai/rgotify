@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.dinglebear/rgotify",
   "title": "Gotify RMCP",
-  "description": "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.",
+  "description": "Gotify notifications and app, client, and message management over MCP and CLI.",
   "version": "0.1.2",
   "websiteUrl": "https://rgotify.dinglebear.ai",
   "repository": {

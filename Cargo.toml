@@ -61,7 +61,7 @@ repository.workspace = true
 publish = false
 categories = ["command-line-utilities", "api-bindings", "network-programming", "development-tools"]
 keywords = ["mcp", "gotify", "notifications", "rmcp", "homelab"]
-description = "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth."
+description = "Gotify notifications and app, client, and message management over MCP and CLI."
 autobins = false
 
 [[bin]]
