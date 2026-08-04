@@ -1,6 +1,6 @@
 # gotify-rmcp
 
-MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.
+Gotify notifications and app, client, and message management over MCP and CLI.
 
 It exposes one MCP tool, `gotify`, plus the `rgotify` CLI. Agents can send
 notifications, inspect server health, list messages, and manage Gotify apps and
