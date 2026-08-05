@@ -3,9 +3,15 @@ name: Release
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: Existing vX.Y.Z release tag to resume
+        required: true
+        type: string
 
 concurrency:
-  group: release-${{ github.event.release.tag_name }}
+  group: release-${{ github.event.release.tag_name || inputs.tag_name }}
   cancel-in-progress: false
 
 permissions:
@@ -23,7 +29,7 @@ jobs:
     steps:
       - id: version
         env:
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag_name }}
         run: |
           [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]
           echo "value=${TAG#v}" >> "$GITHUB_OUTPUT"
@@ -33,7 +39,7 @@ jobs:
     needs: [meta]
     uses: dinglebear-ai/workflows/.github/workflows/hosted-rust-platform-release.yml@d1a41a7af9c41189e0f1062234364f5814bda99d
     with:
-      checkout-ref: ${{ github.event.release.tag_name }}
+      checkout-ref: ${{ github.event.release.tag_name || inputs.tag_name }}
       targets-json: >-
         [{"runner":"ubuntu-24.04","target":"x86_64-unknown-linux-gnu"},
          {"runner":"windows-2025","target":"x86_64-pc-windows-msvc"}]
@@ -62,19 +68,17 @@ jobs:
     needs: [build]
     uses: dinglebear-ai/workflows/.github/workflows/github-release.yml@d1a41a7af9c41189e0f1062234364f5814bda99d
     with:
-      release-tag: ${{ github.event.release.tag_name }}
+      release-tag: ${{ github.event.release.tag_name || inputs.tag_name }}
       artifact-pattern: rgotify-*
 
   npm:
     name: Publish npm launcher
     needs: [meta, github-release]
-    uses: dinglebear-ai/workflows/.github/workflows/npm-trusted-publish.yml@a5937b60b317abed7e757737d95ad003fac2bfb0
+    uses: dinglebear-ai/workflows/.github/workflows/npm-trusted-publish.yml@64d705af6e164aac58d507df6fb2f6bdc8a4d22d
     with:
-      checkout-ref: ${{ github.event.release.tag_name }}
+      checkout-ref: ${{ github.event.release.tag_name || inputs.tag_name }}
       expected-version: ${{ needs.meta.outputs.version }}
       working-directory: packages/gotify-rmcp
       enable-cache: false
       install-command: "true"
       verify-command: npm test && npm run check && npm pack --dry-run --json
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
