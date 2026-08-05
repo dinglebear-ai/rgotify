@@ -3,7 +3,7 @@
   "name": "ai.dinglebear/rgotify",
   "title": "Gotify RMCP",
   "description": "Gotify notifications and app, client, and message management over MCP and CLI.",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "websiteUrl": "https://rgotify.dinglebear.ai",
   "repository": {
     "url": "https://github.com/dinglebear-ai/rgotify",
@@ -25,7 +25,7 @@
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@dinglebear/rgotify",
-      "version": "0.1.2",
+      "version": "0.2.0",
       "runtimeHint": "npx",
       "packageArguments": [
         {
@@ -105,11 +105,11 @@
       "namespace": "ai.dinglebear",
       "dnsDomain": "dinglebear.ai",
       "distribution": {
-        "npm": "@dinglebear/rgotify@0.1.2",
+        "npm": "@dinglebear/rgotify@0.2.0",
         "nodePackage": "@dinglebear/rgotify"
       },
       "buildInfo": {
-        "version": "0.1.2",
+        "version": "0.2.0",
         "repository": "https://github.com/dinglebear-ai/rgotify"
       }
     }
