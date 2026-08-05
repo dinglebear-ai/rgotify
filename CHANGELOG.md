@@ -14,8 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Update the workspace-owned Cargo version explicitly during release-please runs instead of treating the inherited package version as directly tagged.
+
 ### Changed
 
+- Pin the shared Rust cache action to Kache 0.13.0 so hosted and self-hosted jobs use the same stabilized daemon protocol.
 - Bind the production MCP port only to DOOKIE's Tailscale and LAN addresses instead of every host interface.
 
 ## [0.1.1] - 2026-06-01
