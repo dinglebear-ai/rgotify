@@ -75,6 +75,11 @@
         "packages/gotify-rmcp/package.json",
         {
           "type": "json",
+          "path": "packages/gotify-rmcp/package.json",
+          "jsonpath": "$.binaryVersion"
+        },
+        {
+          "type": "json",
           "path": "server.json",
           "jsonpath": "$.version"
         },
