@@ -9,6 +9,11 @@ on:
         description: Existing vX.Y.Z release tag to resume
         required: true
         type: string
+      publish_npm:
+        description: Publish the npm launcher after rebuilding release assets
+        required: true
+        default: true
+        type: boolean
 
 concurrency:
   group: release-${{ github.event.release.tag_name || inputs.tag_name }}
@@ -50,15 +55,23 @@ jobs:
         if [[ "$TARGET" == "x86_64-pc-windows-msvc" ]]; then
           artifact="rgotify-windows-x86_64.exe"
           archive="rgotify-windows-x86_64.tar.gz"
+          archive_binary="rgotify.exe"
           source="target/$TARGET/release/rgotify.exe"
         else
           artifact="rgotify-linux-x86_64"
           archive="rgotify-x86_64.tar.gz"
+          archive_binary="rgotify"
           source="target/$TARGET/release/rgotify"
         fi
+        archive_root="dist/archive-root"
+        rm -rf "$archive_root"
+        mkdir -p "$archive_root"
         cp "$source" "dist/$artifact"
+        cp "$source" "$archive_root/$archive_binary"
         sha256sum "dist/$artifact" > "dist/$artifact.sha256"
-        tar -C dist -czf "dist/$archive" "$artifact"
+        tar -C "$archive_root" -czf "dist/$archive" "$archive_binary"
+        test "$(tar -tzf "dist/$archive")" = "$archive_binary"
+        rm -rf "$archive_root"
         sha256sum "dist/$archive" > "dist/$archive.sha256"
       artifact-path: dist/*
       artifact-prefix: rgotify
@@ -73,6 +86,7 @@ jobs:
 
   npm:
     name: Publish npm launcher
+    if: github.event_name == 'release' || inputs.publish_npm
     needs: [meta, github-release]
     uses: dinglebear-ai/workflows/.github/workflows/npm-trusted-publish.yml@64d705af6e164aac58d507df6fb2f6bdc8a4d22d
     with:

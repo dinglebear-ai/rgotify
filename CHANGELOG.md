@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Package release archives with the canonical internal binary names expected by the npm installer and support asset-only recovery runs.
 - Publish npm releases through token-free OIDC and allow the release workflow to resume an existing immutable tag.
 - Keep the npm launcher `binaryVersion` synchronized with the release tag so it downloads the matching native binary.
 - Update the workspace-owned Cargo version explicitly during release-please runs instead of treating the inherited package version as directly tagged.
