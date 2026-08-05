@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1](https://github.com/dinglebear-ai/rgotify/compare/v0.2.0...v0.2.1) (2026-08-05)
+
+
+### Fixed
+
+* **release:** package canonical launcher archives ([#30](https://github.com/dinglebear-ai/rgotify/issues/30)) ([7f16b99](https://github.com/dinglebear-ai/rgotify/commit/7f16b991192b7d17afd717f6cf69b59d45cc338b))
+* **release:** resume npm publication with OIDC ([#28](https://github.com/dinglebear-ai/rgotify/issues/28)) ([b05b3c1](https://github.com/dinglebear-ai/rgotify/commit/b05b3c19b38461931e4f081fe82e444a1d5bebf7))
+
 ## [0.2.0](https://github.com/dinglebear-ai/rgotify/compare/v0.1.2...v0.2.0) (2026-08-05)
 
 
