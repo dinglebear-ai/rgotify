@@ -445,7 +445,7 @@ Gotify API behavior stay outside the MCP and CLI shims.
 | npm launcher | `packages/gotify-rmcp/package.json`, `bin/rgotify.js`, `lib/platform.js`, `scripts/install.js` | GitHub Release tag and assets named `rgotify-x86_64.tar.gz` and `rgotify-windows-x86_64.tar.gz`. |
 | GitHub Releases | `.github/workflows/*`, `scripts/install.sh` | Package version, binary name, checksums, supported platforms. |
 | Docker / Compose | `config/Dockerfile`, `docker-compose*.yml` | Exposed port `40020`, healthcheck `/health`, env file contract. |
-| MCP registry | `server.json` | Server identity `tv.tootie/gotify-rmcp`, env vars, transport URL, package version. |
+| MCP registry | `server.json` | Server identity `tv.nashost/gotify-rmcp`, env vars, transport URL, package version. |
 | Plugin | `plugins/gotify` | Runtime command, user config, bundled metadata. No hooks are shipped. |
 | Docs | `README.md`, `docs/INVENTORY.md`, `docs/QUICKSTART.md` | Current binary name, default port, action list, and env names. |
 
