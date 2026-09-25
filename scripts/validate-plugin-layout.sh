@@ -29,7 +29,6 @@ for file in "${claude_manifest}" "${codex_manifest}"; do
 done
 
 jq -er '.mcpServers | type == "object" and length > 0' "${mcp_json}" >/dev/null
-jq -er '.mcpServers.gotify.command == "npx" and .mcpServers.gotify.args == ["-y", "@dinglebear/rgotify", "mcp"]' "${mcp_json}" >/dev/null
 
 # The plugin ships no Claude Code hooks: setup is run manually via `rgotify setup`.
 if [[ -e "${plugin_root}/hooks" ]]; then

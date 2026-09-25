@@ -2,7 +2,7 @@
   "mcpServers": {
     "gotify": {
       "command": "npx",
-      "args": ["-y", "@dinglebear/rgotify", "mcp"],
+      "args": ["-y", "gotify-rmcp", "mcp"],
       "env": {
         "GOTIFY_URL": "${user_config.gotify_url}",
         "GOTIFY_CLIENT_TOKEN": "${user_config.gotify_client_token}",

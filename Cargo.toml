@@ -2,11 +2,11 @@
 resolver = "3"
 
 [workspace.package]
-version = "0.2.0"
+version = "0.1.2"
 edition = "2024"
 rust-version = "1.97.1"
 authors = ["dinglebear.ai <hello@dinglebear.ai>"]
-license = "AGPL-3.0-only"
+license = "MIT"
 readme = "README.md"
 homepage = "https://rgotify.dinglebear.ai"
 repository = "https://github.com/dinglebear-ai/rgotify"
@@ -61,7 +61,7 @@ repository.workspace = true
 publish = false
 categories = ["command-line-utilities", "api-bindings", "network-programming", "development-tools"]
 keywords = ["mcp", "gotify", "notifications", "rmcp", "homelab"]
-description = "Gotify notifications and app, client, and message management over MCP and CLI."
+description = "MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth."
 autobins = false
 
 [[bin]]

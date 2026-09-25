@@ -1,6 +1,6 @@
 # gotify-rmcp
 
-Gotify notifications and app, client, and message management over MCP and CLI.
+MCP server and CLI for Gotify: send push notifications and manage messages, apps, and clients over stdio or streamable HTTP, with auth.
 
 It exposes one MCP tool, `gotify`, plus the `rgotify` CLI. Agents can send
 notifications, inspect server health, list messages, and manage Gotify apps and
@@ -445,7 +445,7 @@ Gotify API behavior stay outside the MCP and CLI shims.
 | npm launcher | `packages/gotify-rmcp/package.json`, `bin/rgotify.js`, `lib/platform.js`, `scripts/install.js` | GitHub Release tag and assets named `rgotify-x86_64.tar.gz` and `rgotify-windows-x86_64.tar.gz`. |
 | GitHub Releases | `.github/workflows/*`, `scripts/install.sh` | Package version, binary name, checksums, supported platforms. |
 | Docker / Compose | `config/Dockerfile`, `docker-compose*.yml` | Exposed port `40020`, healthcheck `/health`, env file contract. |
-| MCP registry | `server.json` | Server identity `tv.nashost/gotify-rmcp`, env vars, transport URL, package version. |
+| MCP registry | `server.json` | Server identity `tv.tootie/gotify-rmcp`, env vars, transport URL, package version. |
 | Plugin | `plugins/gotify` | Runtime command, user config, bundled metadata. No hooks are shipped. |
 | Docs | `README.md`, `docs/INVENTORY.md`, `docs/QUICKSTART.md` | Current binary name, default port, action list, and env names. |
 
@@ -570,4 +570,4 @@ their own files and treated as the source of truth for current branch details.
 
 ## License
 
-Original Dinglebear-authored portions of this project are licensed under [AGPL-3.0-only](LICENSE). Separate commercial licensing is available for organizations that need terms outside the AGPL. Third-party material remains under its original license. See [LICENSING.md](https://github.com/dinglebear-ai/rgotify/blob/main/LICENSING.md).
+MIT
