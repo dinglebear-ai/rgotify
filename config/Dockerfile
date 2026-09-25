@@ -41,7 +41,7 @@ EXPOSE 40020/tcp
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD curl -sf http://localhost:40020/health || exit 1
 
-LABEL io.modelcontextprotocol.server.name="tv.tootie/gotify-mcp"
+LABEL io.modelcontextprotocol.server.name="tv.nashost/gotify-mcp"
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["serve", "mcp"]
