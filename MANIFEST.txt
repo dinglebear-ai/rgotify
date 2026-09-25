@@ -1,0 +1,20 @@
+Workspace cleanup archive for dinglebear-ai/rgotify
+Date: 2026-09-25
+Default: main
+
+STALE_BRANCHES 4
+STALE	chore/rmcp3-edition2024	b5e0ec80654b9db5edb44c9d5eed1d684c4a0b81
+STALE	chore/scrub-internal-identifiers-20260805	197627f166472e8f121f469840f413bfe6ef80ed
+STALE	codex/scoped-npm-package	14e23b5c088e5c25794437cf7e87c43a8de66067
+STALE	codex/workflow-alignment-full-20260730	14f84205a73fcfaaeaf0fa688c483118d7e90f78
+
+LOCAL_ONLY_BRANCHES 5
+LOCAL_ONLY	chore/kache-0.15.1	75f5fc2437b312ab8c3141d41431576dabacb5c9
+LOCAL_ONLY	chore/scrub-internal-identifiers-20260805	197627f166472e8f121f469840f413bfe6ef80ed
+LOCAL_ONLY	ci/hosted-kache-minio-20260805	1176a2f3e43103278e09bae3d12aa10f215abb86
+LOCAL_ONLY	codex/scoped-npm-package	14e23b5c088e5c25794437cf7e87c43a8de66067
+LOCAL_ONLY	main	75f5fc2437b312ab8c3141d41431576dabacb5c9
+
+STALE_WORKTREES 0
+
+WIP_SNAPSHOTS 0

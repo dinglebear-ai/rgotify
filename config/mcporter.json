@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "gotify": {
-      "url": "http://localhost:40020/mcp",
-      "transport": "http"
-    }
-  }
-}
