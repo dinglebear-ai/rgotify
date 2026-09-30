@@ -165,3 +165,4 @@ CLAUDE.md.local
 # Local binary artifacts
 /bin/
 plugins/gotify/bin/
+worktrees/
