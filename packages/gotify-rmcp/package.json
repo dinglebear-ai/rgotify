@@ -1,6 +1,6 @@
 {
   "name": "@dinglebear/rgotify",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "AGPL-3.0-only",
   "description": "Gotify notifications and app, client, and message management over MCP and CLI.",
   "homepage": "https://rgotify.dinglebear.ai",
@@ -54,7 +54,7 @@
     "stdio"
   ],
   "mcpName": "ai.dinglebear/rgotify",
-  "binaryVersion": "0.2.0",
+  "binaryVersion": "0.2.1",
   "author": {
     "name": "dinglebear.ai",
     "url": "https://dinglebear.ai"
